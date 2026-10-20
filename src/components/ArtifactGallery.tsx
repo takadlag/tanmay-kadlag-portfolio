@@ -57,31 +57,31 @@ export default function ArtifactGallery() {
 
   return (
     <section id="gallery" className="space-y-10 scroll-mt-28">
-      {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-slate-200 dark:border-white/10 pb-6">
+      {/* Header — full-width heading, filters below */}
+      <div className="border-b border-slate-200 dark:border-white/10 pb-6 space-y-4">
         <div className="space-y-2">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 text-xs font-mono font-medium">
             <ImageIcon className="w-3.5 h-3.5 text-cyan-500" />
-            <span>COMPLETE VISUAL ARCHIVE // EVIDENCE &amp; ARTIFACT LEDGER</span>
+            <span>COMPLETE VISUAL ARCHIVE // EVIDENCE &amp; ARTIFACTS</span>
           </div>
           <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-            Complete Visual Archive &amp; <span className="gradient-text font-serif italic">Evidence Ledger</span>
+            Visual Archive &amp; <span className="gradient-text font-serif italic">Evidence Ledger</span>
           </h2>
-          <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base max-w-2xl font-sans">
+          <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base max-w-3xl font-sans leading-relaxed">
             A comprehensive, unedited archive of verified client honors, international delegations, architectural blueprints, and sports championships—complementing the contextual stories above.
           </p>
         </div>
 
-        {/* Filter Pills */}
-        <div className="flex flex-wrap gap-1.5 p-1.5 rounded-2xl glass border border-slate-200 dark:border-white/10 bg-slate-100/80 dark:bg-slate-900/80">
+        {/* Filter Pills — below heading */}
+        <div className="flex flex-wrap gap-2">
           {tabs.map((t) => (
             <button
               key={t.key}
               onClick={() => setFilter(t.key)}
-              className={`px-3.5 py-1.5 rounded-xl font-mono text-xs transition ${
+              className={`px-4 py-2 rounded-xl font-mono text-xs transition-all duration-200 border ${
                 filter === t.key
-                  ? "bg-cyan-500 text-white dark:text-slate-950 font-bold shadow-md"
-                  : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                  ? "bg-cyan-500 text-white dark:text-slate-950 font-bold shadow-md border-cyan-500"
+                  : "glass text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:border-cyan-400/40 border-slate-200 dark:border-white/10"
               }`}
             >
               {t.label}
@@ -91,36 +91,34 @@ export default function ArtifactGallery() {
       </div>
 
       {/* Grid of Clean Artifact Cards */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
         {items.map((artifact) => (
           <div
             key={artifact.id}
             onClick={() => setActiveItem(artifact)}
-            className="group glass glass-hover rounded-3xl overflow-hidden cursor-pointer border border-slate-200/80 dark:border-white/10 shadow-lg flex flex-col justify-between"
+            className="group glass glass-hover rounded-2xl overflow-hidden cursor-pointer border border-slate-200/80 dark:border-white/10 shadow-lg flex flex-col justify-between"
           >
             <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-950">
               <Image
                 src={artifact.image}
                 alt={artifact.title}
                 fill
-                sizes="(max-width: 768px) 100vw, 33vw"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 className="object-cover group-hover:scale-105 transition duration-500"
                 loading="lazy"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono bg-white/20 text-white backdrop-blur-md">
-                  <Maximize2 className="w-3.5 h-3.5" /> Tap to Inspect
+                  <Maximize2 className="w-3 h-3" /> Inspect
                 </span>
               </div>
             </div>
 
-            <div className="p-5 space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="px-2.5 py-0.5 rounded-md text-[10px] font-mono bg-amber-500/10 text-amber-700 dark:text-amber-300 border border-amber-500/20 font-semibold">
-                  {artifact.badge}
-                </span>
-              </div>
-              <h3 className="font-display font-bold text-base text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-cyan-400 transition font-sans">
+            <div className="p-4 space-y-1.5">
+              <span className="px-2 py-0.5 rounded-md text-[10px] font-mono bg-amber-500/10 text-amber-700 dark:text-amber-300 border border-amber-500/20 font-semibold">
+                {artifact.badge}
+              </span>
+              <h3 className="font-display font-bold text-sm text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-cyan-400 transition font-sans leading-snug">
                 {artifact.title}
               </h3>
               <p className="text-slate-500 dark:text-slate-400 text-xs line-clamp-2 font-sans">

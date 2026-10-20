@@ -22,9 +22,9 @@ export default function LifeOdyssey({
 
   const filters = [
     { key: "all", label: "Complete Odyssey", icon: Compass },
-    { key: "deloitte", label: "Professional Engineering (Deloitte)", icon: Briefcase },
-    { key: "vnit", label: "University & Competitions (VNIT)", icon: GraduationCap },
-    { key: "roots", label: "Formative Roots & Global Envoy", icon: Globe },
+    { key: "deloitte", label: "Deloitte Engineering", icon: Briefcase },
+    { key: "vnit", label: "VNIT & Competitions", icon: GraduationCap },
+    { key: "roots", label: "Roots & Global Envoy", icon: Globe },
   ];
 
   // Reverse chronological: Chapter 05 (Present) down to Chapter 01 (Roots)
@@ -34,32 +34,32 @@ export default function LifeOdyssey({
   );
 
   return (
-    <section id="experience" className="space-y-10 scroll-mt-28">
-      {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-slate-200 dark:border-white/10 pb-6">
+    <section id="experience" className="space-y-8 scroll-mt-28">
+      {/* Section Header — full-width, never compressed */}
+      <div className="border-b border-slate-200 dark:border-white/10 pb-6 space-y-4">
         <div className="space-y-2">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-700 dark:text-amber-300 text-xs font-mono font-medium">
             <Briefcase className="w-3.5 h-3.5" />
-            <span>CAREER PROGRESSION // CHRONICLES OF IMPACT &amp; ODYSSEY</span>
+            <span>CAREER PROGRESSION // CHRONICLES OF IMPACT</span>
           </div>
           <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             Engineering Milestones &amp; <span className="sacred-gold-text font-serif italic">Visual Odyssey</span>
           </h2>
-          <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base max-w-2xl font-sans">
+          <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base max-w-3xl font-sans leading-relaxed">
             A documentary progression from foundational rural discipline through VNIT engineering, international diplomacy in Japan, to industrializing national-scale AI at Deloitte.
           </p>
         </div>
 
-        {/* Filter Pills */}
-        <div className="flex flex-wrap gap-1.5 p-1.5 rounded-2xl glass border border-slate-200 dark:border-white/10 bg-slate-100/80 dark:bg-slate-900/80 shrink-0">
+        {/* Filter Pills — below heading, full-width, wraps naturally */}
+        <div className="flex flex-wrap gap-2">
           {filters.map((f) => (
             <button
               key={f.key}
               onClick={() => setCategory(f.key)}
-              className={`px-3.5 py-1.5 rounded-xl font-mono text-xs transition flex items-center gap-1.5 ${
+              className={`px-4 py-2 rounded-xl font-mono text-xs transition-all duration-200 flex items-center gap-2 border ${
                 currentCategory === f.key
-                  ? "bg-amber-500 text-white dark:text-slate-950 font-bold shadow-md"
-                  : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                  ? "bg-amber-500 text-white dark:text-slate-950 font-bold shadow-md border-amber-500"
+                  : "glass text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:border-amber-400/40 border-slate-200 dark:border-white/10"
               }`}
             >
               <f.icon className="w-3.5 h-3.5" />
@@ -70,7 +70,7 @@ export default function LifeOdyssey({
       </div>
 
       {/* Editorial Timeline Stream with Contextual Photographs */}
-      <div className="relative pl-6 sm:pl-10 border-l-2 border-amber-500/30 dark:border-amber-500/20 space-y-12">
+      <div className="relative pl-6 sm:pl-10 border-l-2 border-amber-500/30 dark:border-amber-500/20 space-y-10">
         {filteredEvents.map((event, index) => {
           const isDeloitte = event.category === "deloitte";
           const hasImage = Boolean(event.image);
@@ -97,7 +97,7 @@ export default function LifeOdyssey({
                 }`}
               >
                 {/* Meta Header */}
-                <div className="p-6 sm:p-8 pb-4 border-b border-slate-200 dark:border-white/10 flex flex-wrap items-center justify-between gap-3">
+                <div className="p-5 sm:p-6 pb-3 border-b border-slate-200 dark:border-white/10 flex flex-wrap items-center justify-between gap-3">
                   <span className="font-mono text-xs text-amber-600 dark:text-cyan-400 font-bold tracking-wider uppercase">
                     {event.chapter}
                   </span>
@@ -113,11 +113,11 @@ export default function LifeOdyssey({
                 </div>
 
                 {/* Editorial Body: Story & Photographic Artifact */}
-                <div className="p-6 sm:p-8 space-y-6">
-                  <div className={`grid gap-8 items-start ${hasImage ? "lg:grid-cols-12" : "grid-cols-1"}`}>
+                <div className="p-5 sm:p-6 space-y-5">
+                  <div className={`grid gap-6 items-start ${hasImage ? "lg:grid-cols-12" : "grid-cols-1"}`}>
                     {/* Narrative Column */}
                     <div className={`space-y-4 ${hasImage ? "lg:col-span-7" : "col-span-1"}`}>
-                      <h3 className="font-display text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white leading-snug">
+                      <h3 className="font-display text-xl sm:text-2xl font-bold text-slate-900 dark:text-white leading-snug">
                         {event.title}
                       </h3>
                       <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed font-sans">
@@ -126,13 +126,13 @@ export default function LifeOdyssey({
 
                       {/* Technical Highlights / Quantified Evidence */}
                       {event.highlights && (
-                        <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-3 pt-3">
+                        <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-3 pt-2">
                           {event.highlights.map((h) => (
                             <div
                               key={h.label}
                               className="p-3.5 rounded-2xl bg-slate-100/70 dark:bg-slate-900/60 border border-slate-200/60 dark:border-white/5 space-y-1"
                             >
-                              <strong className="text-amber-700 dark:text-cyan-400 block font-mono text-[11px] font-bold">
+                              <strong className="text-amber-700 dark:text-cyan-400 block font-mono text-xs font-bold">
                                 {h.label}
                               </strong>
                               <span className="text-slate-700 dark:text-slate-300 text-xs block leading-relaxed">

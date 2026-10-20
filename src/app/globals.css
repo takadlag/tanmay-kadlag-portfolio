@@ -6,8 +6,8 @@
 
 :root {
   --bg-base: #faf8f5;
-  --bg-surface: rgba(255, 255, 255, 0.85);
-  --bg-card: rgba(255, 255, 255, 0.7);
+  --bg-surface: rgba(255, 255, 255, 0.88);
+  --bg-card: rgba(255, 255, 255, 0.75);
   --text-primary: #18181b;
   --text-secondary: #3f3f46;
   --text-muted: #71717a;
@@ -32,6 +32,10 @@
   --accent-cyan: #00f2fe;
   --sacred-gradient: linear-gradient(135deg, #f59e0b 0%, #00f2fe 50%, #10b981 100%);
   --glow-shadow: 0 10px 40px -10px rgba(0, 242, 254, 0.15);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {

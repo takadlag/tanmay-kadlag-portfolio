@@ -24,7 +24,7 @@ export default function CredentialsVault() {
         <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
           Core Technical Skills &amp; <span className="sacred-gold-text font-serif italic">Recognition Vault</span>
         </h2>
-        <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base max-w-2xl font-sans">
+        <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base max-w-3xl font-sans leading-relaxed">
           Production competencies across distributed computing, Lakehouse architectures, cloud orchestration, predictive ML models, and verified corporate honors.
         </p>
       </div>

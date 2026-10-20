@@ -31,33 +31,33 @@ export default function ProjectUniverse() {
 
   return (
     <section id="projects" className="space-y-10 scroll-mt-28">
-      {/* Section Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-slate-200 dark:border-white/10 pb-6">
+      {/* Section Header — full-width heading, tabs below */}
+      <div className="border-b border-slate-200 dark:border-white/10 pb-6 space-y-4">
         <div className="space-y-2">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 text-xs font-mono font-medium">
             <Workflow className="w-3.5 h-3.5 text-cyan-500" />
-            <span>FEATURED ENGINEERING PORTFOLIO // FLAGSHIP CASE STUDIES</span>
+            <span>FEATURED ENGINEERING // FLAGSHIP CASE STUDIES</span>
           </div>
           <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             Production Data Systems &amp; <span className="gradient-text font-serif italic">AI Architecture</span>
           </h2>
-          <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base max-w-2xl font-sans">
+          <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base max-w-3xl font-sans leading-relaxed">
             Engineered enterprise lakehouses, distributed streaming pipelines, and neural demand forecasting models deployed across national-scale operations.
           </p>
         </div>
 
-        {/* 3 Flagship Project Selector Tabs */}
-        <div className="flex flex-wrap gap-2 p-1.5 rounded-2xl glass border border-slate-200 dark:border-white/10 bg-slate-100/80 dark:bg-slate-900/80 shrink-0">
+        {/* 3 Flagship Project Selector Tabs — below heading, full width */}
+        <div className="flex flex-wrap gap-2">
           {FLAGSHIP_PROJECTS.map((proj) => {
             const isSelected = selectedProjectId === proj.id;
             return (
               <button
                 key={proj.id}
                 onClick={() => setSelectedProjectId(proj.id)}
-                className={`px-3.5 py-2 rounded-xl text-xs font-mono font-semibold transition-all duration-200 flex items-center gap-2 ${
+                className={`px-4 py-2.5 rounded-xl text-xs font-mono font-semibold transition-all duration-200 flex items-center gap-2 border ${
                   isSelected
-                    ? "bg-amber-500 text-white dark:text-slate-950 shadow-md ring-1 ring-amber-500/30 font-bold"
-                    : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                    ? "bg-amber-500 text-white dark:text-slate-950 shadow-md border-amber-500 font-bold"
+                    : "glass text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:border-cyan-400/40 border-slate-200 dark:border-white/10"
                 }`}
                 aria-pressed={isSelected}
               >
@@ -150,7 +150,7 @@ export default function ProjectUniverse() {
                 caption: activeProject.imageCaption,
               })
             }
-            className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden bg-slate-950 border border-slate-200 dark:border-white/10 cursor-pointer group shadow-xl"
+            className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden bg-slate-900/5 dark:bg-slate-950 border border-slate-200 dark:border-white/10 cursor-pointer group shadow-xl"
           >
             <Image
               src={activeProject.primaryImage}
@@ -470,7 +470,7 @@ export default function ProjectUniverse() {
               </button>
             </div>
 
-            <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden bg-slate-950 border border-slate-800 flex items-center justify-center">
+            <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden bg-slate-900/10 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center justify-center">
               <Image
                 src={modalImage.src}
                 alt={modalImage.alt}

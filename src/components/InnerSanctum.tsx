@@ -79,8 +79,8 @@ export default function InnerSanctum() {
 
   return (
     <section id="philosophy" className="space-y-10 scroll-mt-28">
-      {/* Section Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-slate-200 dark:border-white/10 pb-6">
+      {/* Section Header — full-width heading */}
+      <div className="border-b border-slate-200 dark:border-white/10 pb-6 space-y-4">
         <div className="space-y-2">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-700 dark:text-amber-300 text-xs font-mono font-medium">
             <Sparkles className="w-3.5 h-3.5" />
@@ -89,13 +89,13 @@ export default function InnerSanctum() {
           <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             The Yogic Foundation of <span className="sacred-gold-text font-serif italic">High-Scale Systems</span>
           </h2>
-          <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base max-w-2xl font-sans">
+          <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base max-w-3xl font-sans leading-relaxed">
             Sparked in Class VIII by Swami Vivekananda&apos;s writings and forged with the VNIT Nagpur Yoga Team under Awadhesh Sir. High-velocity distributed systems require absolute inner stillness.
           </p>
         </div>
 
-        {/* Patanjali Yoga Sutra Banner */}
-        <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-xs font-serif text-amber-800 dark:text-amber-300 max-w-sm shrink-0">
+        {/* Patanjali Yoga Sutra Banner — below heading */}
+        <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-xs font-serif text-amber-800 dark:text-amber-300 max-w-md">
           <span className="font-bold text-sm block mb-1">योगश्चित्तवृत्तिनिरोधः</span>
           <span className="font-mono text-[11px] text-slate-600 dark:text-slate-400 block">
             &ldquo;Yoga is the intentional stilling of the mind&apos;s modifications.&rdquo; — Yoga Sutras 1.2

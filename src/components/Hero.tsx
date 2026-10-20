@@ -2,13 +2,14 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Download, ChevronDown, ArrowRight, ShieldCheck, FileText, CheckCircle2 } from "lucide-react";
+import { Download, ChevronDown, ArrowRight, ShieldCheck, FileText, CheckCircle2, Maximize2, X } from "lucide-react";
 import { PROFILE_DATA } from "../data/portfolioData";
 import CountUp from "./CountUp";
 import NeuralDataCore from "./NeuralDataCore";
 
 export default function Hero() {
   const [resumeDropdownOpen, setResumeDropdownOpen] = useState(false);
+  const [showPortraitModal, setShowPortraitModal] = useState(false);
 
   return (
     <section id="hero" className="relative pt-4 sm:pt-8 pb-8 scroll-mt-28">
@@ -18,10 +19,43 @@ export default function Hero() {
       <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
         {/* Left Column: Vision, Positioning & Verified Metrics */}
         <div className="lg:col-span-7 space-y-6">
-          {/* Professional Status Pill */}
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 text-xs font-mono font-medium shadow-sm">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span>DELOITTE iQ INNOVATION TEAM • PUNE, INDIA</span>
+          {/* Professional Status Pill & Mobile Identity Preview */}
+          <div className="flex flex-wrap items-center gap-3">
+            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 text-xs font-mono font-medium shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span>DELOITTE iQ INNOVATION TEAM • PUNE, INDIA</span>
+            </div>
+          </div>
+
+          {/* Prominent Mobile Portrait Card (Visible on mobile screens < 640px) */}
+          <div className="flex sm:hidden items-center gap-4 p-4 rounded-2xl glass border border-slate-200/80 dark:border-white/10 shadow-lg">
+            <div
+              onClick={() => setShowPortraitModal(true)}
+              className="relative w-20 h-20 rounded-2xl overflow-hidden p-[2px] bg-gradient-to-tr from-amber-500 via-cyan-500 to-emerald-500 shrink-0 shadow-md cursor-pointer"
+              title="Tap to view full-resolution portrait"
+            >
+              <div className="relative w-full h-full rounded-[14px] overflow-hidden bg-slate-900">
+                <Image
+                  src="/prof.jpg"
+                  alt="Tanmay Ramrao Kadlag"
+                  fill
+                  sizes="80px"
+                  className="object-cover"
+                  priority
+                />
+              </div>
+            </div>
+            <div className="space-y-0.5">
+              <h2 className="font-display font-bold text-base text-slate-900 dark:text-white leading-tight">
+                Tanmay Ramrao Kadlag
+              </h2>
+              <p className="font-mono text-xs text-cyan-700 dark:text-cyan-400 font-medium">
+                ML &amp; Big Data Engineer @ Deloitte
+              </p>
+              <p className="text-[11px] text-slate-500 dark:text-slate-400 font-sans">
+                VNIT &apos;22 • Japan Envoy
+              </p>
+            </div>
           </div>
 
           {/* Editorial Headline */}
@@ -168,43 +202,145 @@ export default function Hero() {
             {/* Signature Interactive Visual: Neural Data Core */}
             <NeuralDataCore />
 
-            {/* Profile Bar Anchored Below Signature Visual */}
-            <div className="mt-4 pt-4 border-t border-slate-200 dark:border-white/10 flex items-center justify-between gap-4">
-              <div className="flex items-center gap-3.5">
-                <div className="relative w-12 h-12 rounded-xl overflow-hidden p-[1.5px] bg-gradient-to-tr from-amber-500 via-cyan-500 to-emerald-500 shrink-0 shadow-md">
-                  <div className="relative w-full h-full rounded-[10px] overflow-hidden bg-slate-900">
-                    <Image
-                      src="/prof.jpg"
-                      alt="Tanmay Ramrao Kadlag"
-                      fill
-                      sizes="48px"
-                      className="object-cover"
-                      priority
-                    />
+            {/* Prominent Profile Showcase Card Anchored Below Signature Visual */}
+            <div className="mt-5 pt-5 border-t border-slate-200/80 dark:border-white/10 flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-5">
+              {/* High-Resolution Portrait with Gradient Aura */}
+              <div
+                onClick={() => setShowPortraitModal(true)}
+                className="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 rounded-2xl overflow-hidden p-[2.5px] bg-gradient-to-tr from-amber-500 via-cyan-500 to-emerald-500 shrink-0 shadow-xl shadow-cyan-500/10 cursor-pointer group/photo transition duration-300 hover:shadow-cyan-500/20"
+                title="Click to view full-resolution portrait"
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") setShowPortraitModal(true);
+                }}
+              >
+                <div className="relative w-full h-full rounded-[14px] overflow-hidden bg-slate-900">
+                  <Image
+                    src="/prof.jpg"
+                    alt="Tanmay Ramrao Kadlag — ML & Big Data Engineer"
+                    fill
+                    sizes="(max-width: 640px) 112px, 144px"
+                    className="object-cover object-center group-hover/photo:scale-108 transition-transform duration-500"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/photo:opacity-100 transition-opacity flex items-center justify-center">
+                    <Maximize2 className="w-5 h-5 text-white drop-shadow" />
                   </div>
                 </div>
-                <div>
-                  <h2 className="font-display font-bold text-sm text-slate-900 dark:text-white leading-tight">
-                    Tanmay Ramrao Kadlag
-                  </h2>
-                  <p className="font-mono text-[11px] text-slate-500 dark:text-cyan-400">
-                    ML &amp; Big Data Engineer @ Deloitte iQ
-                  </p>
-                </div>
+                {/* Live Active Status Indicator */}
+                <div
+                  className="absolute bottom-1 right-1 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white dark:border-slate-950 shadow-md"
+                  title="Active: Open to High-Impact Opportunities"
+                />
               </div>
 
-              <a
-                href={PROFILE_DATA.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-3 py-1.5 rounded-xl font-mono text-xs text-amber-700 dark:text-amber-400 hover:bg-amber-500/10 transition border border-amber-500/20 font-semibold"
-              >
-                LinkedIn →
-              </a>
+              {/* Identity & Social Connection Suite */}
+              <div className="space-y-2 flex-1 text-center sm:text-left">
+                <div>
+                  <div className="flex items-center justify-center sm:justify-between gap-2 flex-wrap">
+                    <h2 className="font-display font-bold text-base sm:text-lg text-slate-900 dark:text-white leading-tight">
+                      Tanmay Ramrao Kadlag
+                    </h2>
+                    <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20 font-bold shrink-0">
+                      LEAD ENGINEER
+                    </span>
+                  </div>
+                  <p className="font-mono text-xs text-cyan-700 dark:text-cyan-400 mt-0.5 font-medium">
+                    ML &amp; Big Data Engineer @ Deloitte iQ
+                  </p>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400 font-sans mt-0.5">
+                    VNIT Nagpur &apos;22 • JENESYS 2.0 Envoy to Japan
+                  </p>
+                </div>
+
+                <div className="flex items-center justify-center sm:justify-start gap-1.5 pt-1 flex-wrap">
+                  <a
+                    href={PROFILE_DATA.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-2.5 py-1 rounded-lg font-mono text-[11px] font-semibold text-amber-700 dark:text-amber-400 bg-amber-500/10 hover:bg-amber-500/20 transition border border-amber-500/30 flex items-center gap-1"
+                  >
+                    <span>LinkedIn</span>
+                    <span>→</span>
+                  </a>
+                  <a
+                    href={PROFILE_DATA.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-2.5 py-1 rounded-lg font-mono text-[11px] font-semibold text-slate-700 dark:text-slate-300 bg-slate-200/70 dark:bg-white/5 hover:bg-slate-300 dark:hover:bg-white/10 transition border border-slate-300/80 dark:border-white/10"
+                  >
+                    GitHub
+                  </a>
+                  <a
+                    href="https://www.instagram.com/tanmay_kadlag/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-2.5 py-1 rounded-lg font-mono text-[11px] font-semibold text-rose-600 dark:text-rose-400 bg-rose-500/10 hover:bg-rose-500/20 transition border border-rose-500/30"
+                  >
+                    Insta
+                  </a>
+                  <a
+                    href="https://www.instagram.com/tanmaystarart/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-2.5 py-1 rounded-lg font-mono text-[11px] font-semibold text-purple-600 dark:text-purple-400 bg-purple-500/10 hover:bg-purple-500/20 transition border border-purple-500/30"
+                  >
+                    Art
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* High-Resolution Portrait Modal Lightbox */}
+      {showPortraitModal && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          className="fixed inset-0 z-50 bg-black/90 modal-backdrop flex items-center justify-center p-4 animate-in fade-in duration-200"
+          onClick={() => setShowPortraitModal(false)}
+        >
+          <div
+            className="glass rounded-3xl max-w-lg w-full p-6 border border-slate-200/80 dark:border-white/10 shadow-2xl space-y-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between">
+              <div>
+                <span className="font-mono text-xs text-cyan-600 dark:text-cyan-400 uppercase tracking-widest font-bold">
+                  VERIFIED IDENTITY &bull; PORTRAIT
+                </span>
+                <h3 className="font-display text-xl font-bold text-slate-900 dark:text-white mt-0.5">
+                  Tanmay Ramrao Kadlag
+                </h3>
+              </div>
+              <button
+                onClick={() => setShowPortraitModal(false)}
+                className="p-2.5 rounded-xl bg-slate-200 dark:bg-white/10 hover:bg-slate-300 dark:hover:bg-white/20 text-slate-800 dark:text-white transition"
+                aria-label="Close portrait modal"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="relative aspect-square w-full max-h-[60vh] rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center border border-slate-200 dark:border-white/10 shadow-xl">
+              <Image
+                src="/prof.jpg"
+                alt="Tanmay Ramrao Kadlag — Machine Learning & Big Data Engineer"
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+
+            <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed font-sans">
+              Machine Learning &amp; Big Data Engineer at Deloitte (iQ Innovation Team, Pune), VNIT Nagpur &apos;22 alumnus (B.Tech EEE), and JENESYS 2.0 Youth Envoy to Japan.
+            </p>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
