@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { ThemeProvider } from "../context/ThemeContext";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -17,13 +18,13 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL || "https://tanmay-kadlag.vercel.app"
   ),
-  title: "Tanmay Kadlag | Prana to Pipelines — AI, Big Data & Life Odyssey",
+  title: "Tanmay Kadlag | Prana to Pipelines — AI, Big Data & Sacred Engineering",
   description:
-    "Portfolio & Life Journey of Tanmay Ramrao Kadlag — Machine Learning & Big Data Engineer at Deloitte (iQ Innovation Team), VNIT Nagpur '22 Alumnus, and JENESYS 2.0 Envoy.",
+    "Portfolio of Tanmay Ramrao Kadlag — Machine Learning & Big Data Engineer at Deloitte (iQ Innovation Team), VNIT Nagpur '22 Alumnus, and JENESYS 2.0 Envoy. Merging modern distributed systems with yogic discipline.",
   openGraph: {
     title: "Tanmay Kadlag | ML & Big Data Engineer at Deloitte",
     description:
-      "Portfolio & Life Journey of Tanmay Ramrao Kadlag — Machine Learning & Big Data Engineer at Deloitte (iQ Innovation Team), VNIT Nagpur '22 Alumnus, and JENESYS 2.0 Envoy.",
+      "Portfolio & Life Odyssey of Tanmay Ramrao Kadlag — ML & Big Data Engineer at Deloitte (iQ Innovation Team), VNIT Nagpur '22 Alumnus, and JENESYS 2.0 Envoy.",
     type: "website",
     locale: "en_IN",
     images: [
@@ -39,7 +40,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Tanmay Kadlag | ML & Big Data Engineer at Deloitte",
     description:
-      "Portfolio & Life Journey of Tanmay Ramrao Kadlag — ML & Big Data Engineer at Deloitte (iQ Innovation Team).",
+      "Portfolio & Life Odyssey of Tanmay Ramrao Kadlag — ML & Big Data Engineer at Deloitte (iQ Innovation Team).",
     images: ["/prof.jpg"],
   },
   robots: {
@@ -56,10 +57,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} scroll-smooth`}
+      className={`${geistSans.variable} ${geistMono.variable} dark scroll-smooth`}
+      suppressHydrationWarning
     >
-      <body className="font-sans antialiased selection:bg-cyan-500 selection:text-slate-950">
-        {children}
+      <body className="font-sans antialiased selection:bg-sacred-gold selection:text-slate-950 transition-colors duration-300">
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );

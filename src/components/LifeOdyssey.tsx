@@ -1,5 +1,6 @@
 "use client";
 
+import { Compass } from "lucide-react";
 import { TIMELINE_EVENTS } from "../data/portfolioData";
 
 interface LifeOdysseyProps {
@@ -12,10 +13,10 @@ export default function LifeOdyssey({
   onSelectCategory,
 }: LifeOdysseyProps) {
   const filters = [
-    { key: "all", label: "All Chapters" },
-    { key: "roots", label: "Origins & JNV" },
-    { key: "vnit", label: "VNIT & Yoga" },
-    { key: "deloitte", label: "Deloitte & AI" },
+    { key: "all", label: "All Adhyayas (अध्याय)" },
+    { key: "roots", label: "Origins • JNV" },
+    { key: "vnit", label: "VNIT • Yoga Gold" },
+    { key: "deloitte", label: "Deloitte • AI Karma" },
   ];
 
   const filteredEvents = TIMELINE_EVENTS.filter(
@@ -23,26 +24,32 @@ export default function LifeOdyssey({
   );
 
   return (
-    <section id="odyssey" className="space-y-8">
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-        <div>
-          <p className="font-mono text-xs text-amber-400 uppercase tracking-widest">
-            CHRONICLES OF TRANSFORMATION
-          </p>
-          <h2 className="font-display text-3xl sm:text-4xl font-bold text-white mt-1">
-            The Life Odyssey: Sangamner to Global AI
+    <section id="odyssey" className="space-y-8 scroll-mt-24">
+      {/* Header */}
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-slate-200 dark:border-white/10 pb-6">
+        <div className="space-y-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-700 dark:text-amber-300 text-xs font-serif tracking-wider">
+            <Compass className="w-3.5 h-3.5" />
+            <span>जीवन यात्रा // THE SACRED ODYSSEY</span>
+          </div>
+          <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+            From Navodaya Roots to <span className="sacred-gold-text font-serif italic">Global Envoy</span>
           </h2>
+          <p className="text-slate-600 dark:text-slate-400 text-sm max-w-2xl font-sans">
+            The formative chapters that sculpted Tanmay&apos;s ethos: rural self-reliance, academic excellence, competitive yogic mastery, and enterprise engineering leadership.
+          </p>
         </div>
 
-        <div className="flex flex-wrap gap-2">
+        {/* Filter Pills */}
+        <div className="flex flex-wrap gap-1.5 p-1.5 rounded-2xl glass border border-slate-200 dark:border-white/10 bg-slate-100/80 dark:bg-slate-900/80">
           {filters.map((f) => (
             <button
               key={f.key}
               onClick={() => onSelectCategory(f.key)}
-              className={`px-3.5 py-1.5 rounded-lg font-mono text-xs transition ${
+              className={`px-3.5 py-1.5 rounded-xl font-mono text-xs transition ${
                 activeCategory === f.key
-                  ? "bg-cyan-500 text-slate-950 font-semibold"
-                  : "glass text-slate-300 hover:text-white"
+                  ? "bg-amber-500 text-white dark:text-slate-950 font-bold shadow-md"
+                  : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
               }`}
             >
               {f.label}
@@ -51,39 +58,47 @@ export default function LifeOdyssey({
         </div>
       </div>
 
-      <div className="relative pl-6 sm:pl-10 border-l-2 border-cyan-500/30 space-y-10">
-        {filteredEvents.map((event) => (
+      {/* Clean Timeline Stream */}
+      <div className="relative pl-6 sm:pl-10 border-l-2 border-amber-500/30 dark:border-amber-500/20 space-y-8">
+        {filteredEvents.map((event, index) => (
           <div key={event.id} className="relative group">
-            <div
-              className={`w-4 h-4 rounded-full ${event.dotColor} border-4 border-slate-950 absolute -left-[33px] sm:-left-[49px] top-1.5`}
-            />
-            <div className="glass glass-hover rounded-2xl p-6 transition duration-300">
-              <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
-                <span className="font-mono text-xs text-cyan-300 uppercase">
+            {/* Sacred Node Marker */}
+            <div className="w-6 h-6 rounded-full bg-white dark:bg-slate-950 border-2 border-amber-500 text-amber-600 dark:text-amber-400 flex items-center justify-center font-serif text-[10px] font-bold absolute -left-[37px] sm:-left-[53px] top-1 shadow-md">
+              {index + 1}
+            </div>
+
+            {/* Chapter Card */}
+            <div className="glass glass-hover rounded-3xl p-6 sm:p-8 border border-slate-200/80 dark:border-white/10 shadow-lg space-y-4">
+              <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 dark:border-white/10 pb-3">
+                <span className="font-mono text-xs text-amber-600 dark:text-amber-400 font-semibold tracking-wider uppercase">
                   {event.chapter}
                 </span>
-                <span className="px-2.5 py-0.5 rounded-full text-xs font-mono bg-white/5 text-slate-200 border border-white/10">
+                <span className="px-3 py-1 rounded-full text-[11px] font-mono bg-amber-500/10 text-amber-800 dark:text-amber-300 border border-amber-500/20">
                   {event.badge}
                 </span>
               </div>
-              <h3 className="font-display text-xl font-bold text-white">
+
+              <h3 className="font-display text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">
                 {event.title}
               </h3>
-              <p className="text-slate-300 text-sm mt-2 leading-relaxed">
+
+              <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed font-sans">
                 {event.description}
               </p>
 
               {event.highlights && (
-                <div className="grid sm:grid-cols-3 gap-3 mt-4 pt-4 border-t border-white/10 text-xs">
+                <div className="grid sm:grid-cols-3 gap-3 pt-3 border-t border-slate-200 dark:border-white/10">
                   {event.highlights.map((h) => (
                     <div
                       key={h.label}
-                      className="bg-white/[0.02] p-3 rounded-lg"
+                      className="p-3.5 rounded-2xl bg-slate-100/70 dark:bg-slate-900/50 border border-slate-200/60 dark:border-white/5"
                     >
-                      <strong className={`${h.color} block font-mono mb-1`}>
+                      <strong className="text-amber-600 dark:text-cyan-400 block font-mono text-xs mb-1">
                         {h.label}
                       </strong>
-                      <span className="text-slate-300">{h.text}</span>
+                      <span className="text-slate-700 dark:text-slate-300 text-xs">
+                        {h.text}
+                      </span>
                     </div>
                   ))}
                 </div>

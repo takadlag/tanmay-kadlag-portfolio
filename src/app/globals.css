@@ -1,46 +1,114 @@
-@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body {
-  background-color: #050811;
-  color: #e2e8f0;
-  overflow-x: hidden;
+:root {
+  --bg-base: #faf8f5;
+  --bg-surface: rgba(255, 255, 255, 0.85);
+  --bg-card: rgba(255, 255, 255, 0.7);
+  --text-primary: #18181b;
+  --text-secondary: #3f3f46;
+  --text-muted: #71717a;
+  --border-subtle: rgba(180, 83, 9, 0.12);
+  --border-highlight: rgba(180, 83, 9, 0.28);
+  --accent-gold: #b45309;
+  --accent-cyan: #0284c7;
+  --sacred-gradient: linear-gradient(135deg, #b45309 0%, #0284c7 50%, #059669 100%);
+  --glow-shadow: 0 10px 40px -10px rgba(180, 83, 9, 0.12);
 }
 
+.dark {
+  --bg-base: #050811;
+  --bg-surface: rgba(10, 15, 30, 0.8);
+  --bg-card: rgba(15, 23, 42, 0.65);
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-highlight: rgba(0, 242, 254, 0.3);
+  --accent-gold: #f59e0b;
+  --accent-cyan: #00f2fe;
+  --sacred-gradient: linear-gradient(135deg, #f59e0b 0%, #00f2fe 50%, #10b981 100%);
+  --glow-shadow: 0 10px 40px -10px rgba(0, 242, 254, 0.15);
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Glassmorphism tuned for light & dark */
 .glass {
-  background: rgba(15, 23, 42, 0.65);
+  background: var(--bg-card);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-subtle);
+  transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-nav {
+  background: var(--bg-surface);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.glass-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-hover:hover {
-  border-color: rgba(0, 242, 254, 0.4);
-  box-shadow: 0 0 30px rgba(0, 242, 254, 0.12);
-  transform: translateY(-3px);
+  border-color: var(--border-highlight);
+  box-shadow: var(--glow-shadow);
+  transform: translateY(-2px);
 }
 
+/* Vedic and Cyber Glows */
 .zen-glow {
   box-shadow: 0 0 35px rgba(245, 158, 11, 0.15);
 }
 
+.dark .zen-glow {
+  box-shadow: 0 0 40px rgba(245, 158, 11, 0.2);
+}
+
 .cyber-glow {
-  box-shadow: 0 0 35px rgba(0, 242, 254, 0.15);
+  box-shadow: 0 0 35px rgba(2, 132, 199, 0.12);
+}
+
+.dark .cyber-glow {
+  box-shadow: 0 0 35px rgba(0, 242, 254, 0.18);
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #00f2fe 0%, #10b981 50%, #f59e0b 100%);
+  background: var(--sacred-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.sacred-gold-text {
+  background: linear-gradient(135deg, #d97706 0%, #f59e0b 50%, #fbbf24 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Sacred Geometric Patterns */
+.yantra-bg {
+  background-image: radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.05) 0%, transparent 60%);
+}
+
+.dark .yantra-bg {
+  background-image: radial-gradient(circle at 50% 50%, rgba(0, 242, 254, 0.05) 0%, transparent 65%);
 }
 
 /* Scroll Reveal Animations */
 .scroll-reveal {
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(24px);
   transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
               transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -50,7 +118,6 @@ body {
   transform: translateY(0);
 }
 
-/* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
   .scroll-reveal {
     opacity: 1;
@@ -59,9 +126,8 @@ body {
   }
 }
 
-/* Accessible focus styles */
 :focus-visible {
-  outline: 2px solid #00f2fe;
+  outline: 2px solid var(--accent-cyan);
   outline-offset: 2px;
   border-radius: 4px;
 }

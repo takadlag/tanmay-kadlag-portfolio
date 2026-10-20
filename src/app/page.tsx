@@ -1,16 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import NeuralCanvas from "../components/NeuralCanvas";
+import SacredCanvas from "../components/SacredCanvas";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
+import KarmaEngineering from "../components/KarmaEngineering";
 import LifeOdyssey from "../components/LifeOdyssey";
-import ApacNerveCentre from "../components/ApacNerveCentre";
-import ArchitectureLabs from "../components/ArchitectureLabs";
+import InnerSanctum from "../components/InnerSanctum";
 import CredentialsVault from "../components/CredentialsVault";
 import Testimonials from "../components/Testimonials";
 import ArtifactGallery from "../components/ArtifactGallery";
-import ZenCore from "../components/ZenCore";
 import ContactSection from "../components/ContactSection";
 import ScrollReveal from "../components/ScrollReveal";
 import BackToTop from "../components/BackToTop";
@@ -27,13 +26,17 @@ export default function HomePage() {
   };
 
   return (
-    <>
-      <NeuralCanvas />
+    <div className="min-h-screen relative flex flex-col selection:bg-amber-500 selection:text-slate-950">
+      <SacredCanvas />
       <Navbar recruiterMode={recruiterMode} onToggleLens={handleToggleLens} />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-24 space-y-28">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-20 space-y-24 sm:space-y-32 flex-1">
         <ScrollReveal>
           <Hero />
+        </ScrollReveal>
+
+        <ScrollReveal delay={100}>
+          <KarmaEngineering />
         </ScrollReveal>
 
         <ScrollReveal delay={100}>
@@ -43,13 +46,11 @@ export default function HomePage() {
           />
         </ScrollReveal>
 
-        <ScrollReveal delay={100}>
-          <ApacNerveCentre />
-        </ScrollReveal>
-
-        <ScrollReveal delay={100}>
-          <ArchitectureLabs />
-        </ScrollReveal>
+        {!recruiterMode && (
+          <ScrollReveal delay={100}>
+            <InnerSanctum />
+          </ScrollReveal>
+        )}
 
         <ScrollReveal delay={100}>
           <CredentialsVault />
@@ -63,45 +64,40 @@ export default function HomePage() {
           <ArtifactGallery />
         </ScrollReveal>
 
-        {!recruiterMode && (
-          <ScrollReveal delay={100}>
-            <ZenCore />
-          </ScrollReveal>
-        )}
-
         <ScrollReveal delay={100}>
           <ContactSection />
         </ScrollReveal>
       </main>
 
-      <footer className="border-t border-white/10 glass py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div>
-            <p className="font-display font-bold text-white text-lg">
-              {PROFILE_DATA.name.toUpperCase()}
-            </p>
-            <p className="font-mono text-xs text-slate-400">
-              {PROFILE_DATA.role} • {PROFILE_DATA.location}
+      {/* Sacred Footer */}
+      <footer className="border-t border-slate-200 dark:border-white/10 glass py-12 mt-16 transition-colors duration-300">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+          <div className="space-y-1">
+            <div className="flex items-center justify-center md:justify-start gap-2">
+              <span className="font-serif font-bold text-amber-600 dark:text-amber-400 text-lg">
+                ॐ
+              </span>
+              <p className="font-display font-bold text-slate-900 dark:text-white text-base tracking-tight">
+                {PROFILE_DATA.name.toUpperCase()}
+              </p>
+            </div>
+            <p className="font-mono text-xs text-slate-500 dark:text-slate-400">
+              {PROFILE_DATA.role} &bull; {PROFILE_DATA.team}
             </p>
           </div>
-          <div className="flex flex-wrap items-center gap-4 text-xs font-mono">
+
+          <div className="flex flex-wrap items-center justify-center gap-3 text-xs font-mono">
             <a
               href={`mailto:${PROFILE_DATA.email}`}
-              className="px-4 py-2 rounded-lg bg-white/5 hover:bg-cyan-500/20 text-slate-200 transition"
+              className="px-3.5 py-1.5 rounded-xl bg-slate-100 dark:bg-white/5 hover:bg-amber-500/10 hover:text-amber-600 dark:hover:text-cyan-400 text-slate-700 dark:text-slate-300 transition border border-slate-200/80 dark:border-white/5"
             >
               {PROFILE_DATA.email}
-            </a>
-            <a
-              href={`tel:${PROFILE_DATA.phone.replace(/\s+/g, "")}`}
-              className="px-4 py-2 rounded-lg bg-white/5 hover:bg-emerald-500/20 text-slate-200 transition"
-            >
-              {PROFILE_DATA.phone}
             </a>
             <a
               href={PROFILE_DATA.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2 rounded-lg bg-white/5 hover:bg-purple-500/20 text-slate-200 transition"
+              className="px-3.5 py-1.5 rounded-xl bg-slate-100 dark:bg-white/5 hover:bg-cyan-500/10 hover:text-cyan-600 dark:hover:text-cyan-400 text-slate-700 dark:text-slate-300 transition border border-slate-200/80 dark:border-white/5"
             >
               GitHub (takadlag)
             </a>
@@ -109,21 +105,24 @@ export default function HomePage() {
               href={PROFILE_DATA.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2 rounded-lg bg-cyan-500 text-slate-950 font-bold hover:opacity-90 transition"
+              className="px-4 py-1.5 rounded-xl bg-gradient-to-r from-amber-500 to-cyan-500 text-white dark:text-slate-950 font-bold hover:brightness-105 transition shadow-sm"
             >
               LinkedIn Profile
             </a>
           </div>
         </div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 pt-6 border-t border-white/10 text-center">
-          <p className="font-mono text-xs text-slate-500">
-            © {new Date().getFullYear()} {PROFILE_DATA.name}. Crafted with
-            discipline, data, and a touch of prana.
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 pt-6 border-t border-slate-200 dark:border-white/10 text-center space-y-1">
+          <p className="font-serif text-xs text-amber-700 dark:text-amber-400/80">
+            &ldquo;कर्मण्येवाधिकारस्ते मा फलेषु कदाचन&rdquo; — Bhagavad Gita
+          </p>
+          <p className="font-mono text-[11px] text-slate-500">
+            &copy; {new Date().getFullYear()} {PROFILE_DATA.name}. Architected with yogic mindfulness, deterministic data pipelines, and timeless prana.
           </p>
         </div>
       </footer>
 
       <BackToTop />
-    </>
+    </div>
   );
 }

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { Maximize2, X } from "lucide-react";
+import { Maximize2, X, Image as ImageIcon } from "lucide-react";
 import { ARTIFACT_GALLERY, ArtifactItem } from "../data/portfolioData";
 
 export default function ArtifactGallery() {
@@ -23,9 +23,9 @@ export default function ArtifactGallery() {
   const tabs = [
     { key: "all", label: `All Artifacts (${ARTIFACT_GALLERY.length})` },
     { key: "awards", label: "Unilever & Deloitte Awards" },
-    { key: "certs", label: "Stanford, Azure & Databricks Certs" },
-    { key: "architecture", label: "Lakehouse & GCP Dashboards" },
-    { key: "journey", label: "JNV, Japan, VNIT & Yoga Photos" },
+    { key: "certs", label: "Accredited Certifications" },
+    { key: "architecture", label: "System Dashboards" },
+    { key: "journey", label: "Japan, VNIT & Yoga Journey" },
   ];
 
   const items = ARTIFACT_GALLERY.filter(
@@ -33,26 +33,32 @@ export default function ArtifactGallery() {
   );
 
   return (
-    <section id="vault-gallery" className="space-y-8">
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-        <div>
-          <p className="font-mono text-xs text-cyan-400 uppercase tracking-widest">
-            VERIFIED VISUAL EVIDENCE // CLICK ANY ARTIFACT TO INSPECT
-          </p>
-          <h2 className="font-display text-3xl sm:text-4xl font-bold text-white mt-1">
-            Visual Vault: Awards, Dashboards & Life Collages
+    <section id="gallery" className="space-y-8 scroll-mt-24">
+      {/* Header */}
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-slate-200 dark:border-white/10 pb-6">
+        <div className="space-y-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 text-xs font-mono">
+            <ImageIcon className="w-3.5 h-3.5 text-cyan-500" />
+            <span>चित्र वीथिका // VISUAL EVIDENCE & CERTIFICATE VAULT</span>
+          </div>
+          <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+            Original Certifications & <span className="gradient-text font-serif italic">Photo Artifacts</span>
           </h2>
+          <p className="text-slate-600 dark:text-slate-400 text-sm max-w-2xl font-sans">
+            Direct high-resolution documentation of honors, international delegations, architectural diagrams, and yoga competitions.
+          </p>
         </div>
 
-        <div className="flex flex-wrap gap-2">
+        {/* Filter Pills */}
+        <div className="flex flex-wrap gap-1.5 p-1.5 rounded-2xl glass border border-slate-200 dark:border-white/10 bg-slate-100/80 dark:bg-slate-900/80">
           {tabs.map((t) => (
             <button
               key={t.key}
               onClick={() => setFilter(t.key)}
-              className={`px-3 py-1.5 rounded-lg font-mono text-xs transition ${
+              className={`px-3.5 py-1.5 rounded-xl font-mono text-xs transition ${
                 filter === t.key
-                  ? "bg-cyan-500 text-slate-950 font-semibold"
-                  : "glass text-slate-300 hover:text-white"
+                  ? "bg-cyan-500 text-white dark:text-slate-950 font-bold shadow-md"
+                  : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
               }`}
             >
               {t.label}
@@ -61,83 +67,89 @@ export default function ArtifactGallery() {
         </div>
       </div>
 
+      {/* Grid of Clean Artifact Cards */}
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {items.map((item) => (
+        {items.map((artifact) => (
           <div
-            key={item.id}
-            onClick={() => setActiveItem(item)}
-            className="glass glass-hover rounded-2xl overflow-hidden cursor-pointer group flex flex-col justify-between transition duration-300"
+            key={artifact.id}
+            onClick={() => setActiveItem(artifact)}
+            className="group glass glass-hover rounded-3xl overflow-hidden cursor-pointer border border-slate-200 dark:border-white/10 shadow-lg flex flex-col justify-between"
           >
-            <div className="relative h-52 bg-slate-900 overflow-hidden">
+            <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-950">
               <Image
-                src={item.image}
-                alt={item.title}
+                src={artifact.image}
+                alt={artifact.title}
                 fill
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                sizes="(max-width: 768px) 100vw, 33vw"
                 className="object-cover group-hover:scale-105 transition duration-500"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80" />
-              <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-mono bg-slate-950/80 text-cyan-300 border border-cyan-500/30">
-                {item.badge}
-              </span>
-              <div className="absolute bottom-3 right-3 p-2 rounded-lg bg-slate-950/80 text-white opacity-0 group-hover:opacity-100 transition">
-                <Maximize2 className="w-4 h-4 text-cyan-400" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono bg-white/20 text-white backdrop-blur-md">
+                  <Maximize2 className="w-3.5 h-3.5" /> Tap to Inspect
+                </span>
               </div>
             </div>
 
-            <div className="p-5">
-              <h3 className="font-display font-bold text-white text-base group-hover:text-cyan-400 transition">
-                {item.title}
+            <div className="p-5 space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="px-2.5 py-0.5 rounded-md text-[10px] font-mono bg-amber-500/10 text-amber-700 dark:text-amber-300 border border-amber-500/20">
+                  {artifact.badge}
+                </span>
+              </div>
+              <h3 className="font-display font-bold text-base text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-cyan-400 transition">
+                {artifact.title}
               </h3>
-              <p className="text-slate-400 text-xs mt-1.5 leading-relaxed">
-                {item.subtitle}
+              <p className="text-slate-500 dark:text-slate-400 text-xs line-clamp-2">
+                {artifact.subtitle}
               </p>
             </div>
           </div>
         ))}
       </div>
 
+      {/* High-Res Modal Lightbox */}
       {activeItem && (
         <div
           role="dialog"
           aria-modal="true"
-          aria-label={activeItem.title}
-          className="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 bg-black/85 backdrop-blur-xl flex items-center justify-center p-4 animate-in fade-in duration-200"
           onClick={() => setActiveItem(null)}
         >
           <div
-            className="glass max-w-4xl w-full rounded-2xl overflow-hidden border border-cyan-500/40"
+            className="relative max-w-4xl w-full glass rounded-3xl overflow-hidden border border-amber-500/30 p-6 space-y-4"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between px-6 py-4 border-b border-white/10">
+            <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-3">
               <div>
-                <span className="font-mono text-xs text-cyan-400">
+                <span className="font-mono text-xs text-amber-600 dark:text-cyan-400 uppercase tracking-widest font-bold">
                   {activeItem.badge}
                 </span>
-                <h3 className="font-display text-lg font-bold text-white">
+                <h3 className="font-display text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mt-0.5">
                   {activeItem.title}
                 </h3>
               </div>
               <button
                 onClick={() => setActiveItem(null)}
-                className="p-2 rounded-lg bg-white/5 hover:bg-rose-500/20 text-slate-300 hover:text-rose-300 transition"
+                className="p-2 rounded-xl bg-slate-200 dark:bg-white/10 hover:bg-slate-300 dark:hover:bg-white/20 text-slate-800 dark:text-white transition"
+                aria-label="Close modal"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
-            <div className="p-4 bg-slate-950 flex justify-center max-h-[75vh] overflow-auto">
+
+            <div className="relative aspect-[16/10] w-full max-h-[65vh] rounded-2xl overflow-hidden bg-slate-950">
               <Image
                 src={activeItem.image}
                 alt={activeItem.title}
-                width={1200}
-                height={800}
-                className="max-h-[70vh] w-auto object-contain rounded-lg"
+                fill
+                className="object-contain"
                 priority
               />
             </div>
-            <div className="px-6 py-3 bg-slate-900/90 text-xs text-slate-300">
+
+            <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed font-sans">
               {activeItem.subtitle}
-            </div>
+            </p>
           </div>
         </div>
       )}

@@ -1,34 +1,41 @@
-import { Award, Trophy, Code2 } from "lucide-react";
+"use client";
+
+import { Award, Trophy, Code2, ShieldCheck } from "lucide-react";
 import { TECH_STACK, CERTIFICATIONS } from "../data/portfolioData";
 
 export default function CredentialsVault() {
   return (
-    <section id="credentials" className="space-y-10">
-      <div>
-        <p className="font-mono text-xs text-cyan-400 uppercase tracking-widest">
-          VERIFIED CREDENTIALS & HONORS
-        </p>
-        <h2 className="font-display text-3xl sm:text-4xl font-bold text-white mt-1">
-          Tech Stack, Certifications & Recognition Vault
+    <section id="credentials" className="space-y-8 scroll-mt-24">
+      {/* Header */}
+      <div className="border-b border-slate-200 dark:border-white/10 pb-6 space-y-2">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 text-xs font-mono">
+          <ShieldCheck className="w-3.5 h-3.5 text-cyan-500" />
+          <span>प्रमाण // VERIFIED HONORS & COMPETENCIES</span>
+        </div>
+        <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+          Tech Stack, Certifications & <span className="sacred-gold-text font-serif italic">Recognition Vault</span>
         </h2>
+        <p className="text-slate-600 dark:text-slate-400 text-sm max-w-2xl font-sans">
+          Proven enterprise competencies across distributed compute, neural architectures, cloud governance, and client accolades.
+        </p>
       </div>
 
+      {/* Tech Stack Matrix */}
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {TECH_STACK.map((group) => (
           <div
             key={group.category}
-            className="glass rounded-xl p-5 border border-white/10"
+            className="glass glass-hover rounded-3xl p-5 border border-slate-200 dark:border-white/10 space-y-3"
           >
-            <p
-              className={`font-mono text-xs uppercase mb-3 flex items-center gap-2 ${group.color}`}
-            >
-              <Code2 className="w-4 h-4" /> {group.category}
-            </p>
-            <div className="flex flex-wrap gap-2 text-xs font-mono">
+            <div className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-amber-600 dark:text-cyan-400">
+              <Code2 className="w-4 h-4" />
+              <span>{group.category}</span>
+            </div>
+            <div className="flex flex-wrap gap-1.5 text-xs font-mono">
               {group.skills.map((skill) => (
                 <span
                   key={skill}
-                  className="px-2.5 py-1 rounded bg-white/5 text-white"
+                  className="px-2.5 py-1 rounded-xl bg-slate-100 dark:bg-white/5 text-slate-800 dark:text-slate-200 border border-slate-200/80 dark:border-white/5 font-medium"
                 >
                   {skill}
                 </span>
@@ -38,25 +45,29 @@ export default function CredentialsVault() {
         ))}
       </div>
 
+      {/* Dual Columns: Certifications & Recognition */}
       <div className="grid lg:grid-cols-12 gap-6">
-        <div className="lg:col-span-6 glass rounded-2xl p-6 border border-white/10 space-y-4">
-          <h3 className="font-display text-xl font-bold text-white flex items-center gap-2">
-            <Award className="w-5 h-5 text-cyan-400" /> Accredited Certifications
-            (2023–2025)
+        {/* Certifications */}
+        <div className="lg:col-span-6 glass rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-white/10 shadow-lg space-y-4">
+          <h3 className="font-display text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2 border-b border-slate-200 dark:border-white/10 pb-3">
+            <Award className="w-5 h-5 text-cyan-600 dark:text-cyan-400" />
+            <span>Accredited Certifications</span>
           </h3>
-          <div className="space-y-3 text-xs">
+          <div className="space-y-2.5 text-xs">
             {CERTIFICATIONS.map((cert) => (
               <div
                 key={cert.title}
-                className="p-3 rounded-xl bg-white/[0.03] flex justify-between items-center"
+                className="p-3.5 rounded-2xl bg-slate-100/60 dark:bg-white/[0.02] border border-slate-200/80 dark:border-white/5 flex justify-between items-center transition hover:border-cyan-500/40"
               >
                 <div>
-                  <strong className="text-white block text-sm">
+                  <strong className="text-slate-900 dark:text-white block text-sm font-semibold">
                     {cert.title}
                   </strong>
-                  <span className="text-slate-400">{cert.issuer}</span>
+                  <span className="text-slate-500 dark:text-slate-400 font-sans">
+                    {cert.issuer}
+                  </span>
                 </div>
-                <span className="font-mono text-cyan-300 shrink-0 ml-2">
+                <span className="font-mono text-cyan-700 dark:text-cyan-300 shrink-0 ml-3 font-semibold">
                   {cert.date}
                 </span>
               </div>
@@ -64,45 +75,43 @@ export default function CredentialsVault() {
           </div>
         </div>
 
-        <div className="lg:col-span-6 glass rounded-2xl p-6 border border-emerald-500/20 space-y-4">
-          <h3 className="font-display text-xl font-bold text-white flex items-center gap-2">
-            <Trophy className="w-5 h-5 text-amber-400" /> Wall of Recognition
-            (&ldquo;Dots of Fame&rdquo;)
+        {/* Wall of Recognition */}
+        <div className="lg:col-span-6 glass rounded-3xl p-6 sm:p-8 border border-amber-500/20 shadow-lg space-y-4">
+          <h3 className="font-display text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2 border-b border-slate-200 dark:border-white/10 pb-3">
+            <Trophy className="w-5 h-5 text-amber-500" />
+            <span>Wall of Honor (&ldquo;Dots of Fame&rdquo;)</span>
           </h3>
           <div className="space-y-3 text-xs">
-            <div className="p-3.5 rounded-xl bg-gradient-to-r from-amber-500/10 to-transparent border border-amber-500/30">
-              <div className="flex justify-between font-mono text-[11px] text-amber-300 mb-1">
-                <span>UNILEVER UNIOPS • CLIENT AWARD</span>
-                <span>SHILPA MURTHY (GLOBAL TECH DIRECTOR)</span>
+            {/* Unilever UniOps Award */}
+            <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 space-y-1.5">
+              <div className="flex justify-between font-mono text-[10px] text-amber-700 dark:text-amber-300 uppercase tracking-wider font-bold">
+                <span>UNILEVER UNIOPS • CLIENT RECOGNITION</span>
+                <span>SHILPA MURTHY (GLOBAL TECH DIR.)</span>
               </div>
-              <p className="text-slate-200 font-medium">
-                &ldquo;Awarded to Tanmay Kadlag as a symbol of your outstanding
-                commitment and invaluable contribution towards iQ Project.&rdquo;
+              <p className="text-slate-800 dark:text-slate-200 font-sans text-xs leading-relaxed italic">
+                &ldquo;Awarded to Tanmay Kadlag as a symbol of your outstanding commitment and invaluable contribution towards the iQ Project.&rdquo;
               </p>
             </div>
 
-            <div className="p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30">
-              <div className="flex justify-between font-mono text-[11px] text-emerald-300 mb-1">
-                <span>2x DELOITTE &ldquo;MOVE THE DOT — TEAM&rdquo; AWARDS</span>
-                <span>JUN 23, 2025 & NOV 08, 2025</span>
+            {/* 2x Move The Dot */}
+            <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 space-y-1.5">
+              <div className="flex justify-between font-mono text-[10px] text-emerald-700 dark:text-emerald-300 uppercase tracking-wider font-bold">
+                <span>2x DELOITTE &ldquo;MOVE THE DOT&rdquo; EXCELLENCE</span>
+                <span>JUN & NOV 2025</span>
               </div>
-              <p className="text-slate-300">
-                &ldquo;Incredible achievement with the iQ recommendation
-                engine... launching pilot phase in Vietnam, Thailand, Indonesia,
-                and the Philippines to full-scale live operations.&rdquo; —{" "}
-                <em>Rohan Dawar & Pramod Jain</em>
+              <p className="text-slate-700 dark:text-slate-300 font-sans text-xs leading-relaxed">
+                Recognized for launching the iQ engine pilot phase across Vietnam, Thailand, Indonesia, and the Philippines into live production operations.
               </p>
             </div>
 
-            <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/10">
-              <div className="flex justify-between font-mono text-[11px] text-cyan-300 mb-1">
-                <span>3x &ldquo;WALK THE DOT&rdquo; PEER RECOGNITIONS</span>
+            {/* 3x Walk The Dot */}
+            <div className="p-4 rounded-2xl bg-slate-100/60 dark:bg-white/[0.02] border border-slate-200/80 dark:border-white/5 space-y-1.5">
+              <div className="flex justify-between font-mono text-[10px] text-cyan-700 dark:text-cyan-300 uppercase tracking-wider font-bold">
+                <span>3x &ldquo;WALK THE DOT&rdquo; PEER AWARDS</span>
                 <span>JAN, MAR & NOV 2025</span>
               </div>
-              <p className="text-slate-300">
-                Celebrated by colleagues (
-                <em>Sudhanva Gudi, Swati Kumari, Sumedh Kannalwar</em>) for
-                unwavering mentorship, collaboration, and technical guidance.
+              <p className="text-slate-600 dark:text-slate-300 font-sans text-xs leading-relaxed">
+                Celebrated by peers for technical mentorship, PySpark pipeline optimization, and steadfast team leadership.
               </p>
             </div>
           </div>

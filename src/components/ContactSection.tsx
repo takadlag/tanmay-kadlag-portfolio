@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Send, Mail, Phone, MapPin, ExternalLink } from "lucide-react";
+import { Send, Mail, Phone, MapPin, Download, CheckCircle2, HeartHandshake } from "lucide-react";
 import { PROFILE_DATA } from "../data/portfolioData";
 
 export default function ContactSection() {
@@ -26,112 +26,121 @@ export default function ContactSection() {
   const contactCards = [
     {
       icon: Mail,
-      label: "Email",
+      label: "Direct Email",
       value: PROFILE_DATA.email,
       href: `mailto:${PROFILE_DATA.email}`,
-      color: "text-cyan-400",
-      hoverBg: "hover:bg-cyan-500/10",
+      color: "text-amber-600 dark:text-cyan-400",
     },
     {
       icon: Phone,
-      label: "Phone",
+      label: "Direct Phone",
       value: PROFILE_DATA.phone,
       href: `tel:${PROFILE_DATA.phone.replace(/\s+/g, "")}`,
-      color: "text-emerald-400",
-      hoverBg: "hover:bg-emerald-500/10",
+      color: "text-emerald-600 dark:text-emerald-400",
     },
     {
       icon: MapPin,
-      label: "Location",
+      label: "Current Base",
       value: PROFILE_DATA.location,
       href: undefined,
-      color: "text-amber-400",
-      hoverBg: "hover:bg-amber-500/10",
+      color: "text-rose-600 dark:text-rose-400",
     },
   ];
 
   return (
-    <section id="contact" className="space-y-8">
-      <div>
-        <p className="font-mono text-xs text-cyan-400 uppercase tracking-widest">
-          LET&apos;S CONNECT // OPEN TO OPPORTUNITIES
-        </p>
-        <h2 className="font-display text-3xl sm:text-4xl font-bold text-white mt-1">
-          Get In Touch
+    <section id="contact" className="space-y-8 scroll-mt-24">
+      {/* Header */}
+      <div className="border-b border-slate-200 dark:border-white/10 pb-6 space-y-2">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-700 dark:text-amber-300 text-xs font-serif tracking-wider">
+          <HeartHandshake className="w-3.5 h-3.5" />
+          <span>संवाद & संगति // INITIATE DIALOGUE</span>
+        </div>
+        <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+          Let&apos;s Build Something <span className="sacred-gold-text font-serif italic">Transformative</span>
         </h2>
-        <p className="text-slate-400 text-sm mt-2 max-w-2xl">
-          Whether you&apos;re a recruiter, a collaborator, or someone who shares
-          a passion for data and mindfulness — I&apos;d love to hear from you.
+        <p className="text-slate-600 dark:text-slate-400 text-sm max-w-2xl font-sans">
+          Whether you are looking to architect resilient Big Data Lakehouses, deploy production ML pipelines, or discuss mindful leadership — my inbox is open.
         </p>
       </div>
 
-      <div className="grid lg:grid-cols-12 gap-8">
-        {/* Contact Info Cards */}
+      <div className="grid lg:grid-cols-12 gap-8 items-start">
+        {/* Left Column: Direct Info & Resumes */}
         <div className="lg:col-span-5 space-y-4">
-          {contactCards.map((card) => {
-            const Wrapper = card.href ? "a" : "div";
-            const linkProps = card.href
-              ? { href: card.href }
-              : {};
-            return (
-              <Wrapper
-                key={card.label}
-                {...linkProps}
-                className={`glass rounded-xl p-4 flex items-center gap-4 border border-white/10 transition duration-300 ${card.hoverBg} group block`}
-              >
-                <div className={`p-3 rounded-lg bg-white/5 ${card.color}`}>
-                  <card.icon className="w-5 h-5" />
-                </div>
-                <div>
-                  <p className="font-mono text-[11px] text-slate-400 uppercase">
-                    {card.label}
-                  </p>
-                  <p className="text-white font-medium text-sm group-hover:text-cyan-300 transition">
-                    {card.value}
-                  </p>
-                </div>
-              </Wrapper>
-            );
-          })}
+          <div className="glass rounded-3xl p-6 sm:p-7 border border-slate-200 dark:border-white/10 shadow-lg space-y-4">
+            <h3 className="font-display text-lg font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-white/10 pb-3">
+              Direct Contact Coordinates
+            </h3>
 
-          {/* Social Links */}
-          <div className="flex gap-3 pt-2">
-            <a
-              href={PROFILE_DATA.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-1 glass rounded-xl p-4 text-center border border-white/10 hover:border-cyan-500/40 hover:bg-cyan-500/10 transition group"
-            >
-              <p className="font-mono text-xs text-cyan-400 mb-1">LinkedIn</p>
-              <p className="text-white text-sm font-medium group-hover:text-cyan-300 transition flex items-center justify-center gap-1">
-                Connect <ExternalLink className="w-3 h-3" />
-              </p>
-            </a>
-            <a
-              href={PROFILE_DATA.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-1 glass rounded-xl p-4 text-center border border-white/10 hover:border-purple-500/40 hover:bg-purple-500/10 transition group"
-            >
-              <p className="font-mono text-xs text-purple-400 mb-1">GitHub</p>
-              <p className="text-white text-sm font-medium group-hover:text-purple-300 transition flex items-center justify-center gap-1">
-                View Code <ExternalLink className="w-3 h-3" />
-              </p>
-            </a>
+            <div className="space-y-3">
+              {contactCards.map((c) => (
+                <div
+                  key={c.label}
+                  className="p-3.5 rounded-2xl bg-slate-100/60 dark:bg-white/[0.02] border border-slate-200/80 dark:border-white/5 flex items-center gap-3.5"
+                >
+                  <div className={`p-2.5 rounded-xl bg-white dark:bg-slate-900 shadow-sm ${c.color}`}>
+                    <c.icon className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <span className="font-mono text-[10px] text-slate-500 uppercase tracking-wider block">
+                      {c.label}
+                    </span>
+                    {c.href ? (
+                      <a
+                        href={c.href}
+                        className="font-medium text-slate-900 dark:text-white hover:text-amber-600 dark:hover:text-cyan-400 transition text-xs sm:text-sm"
+                      >
+                        {c.value}
+                      </a>
+                    ) : (
+                      <span className="font-medium text-slate-900 dark:text-white text-xs sm:text-sm">
+                        {c.value}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Resume Downloads in Contact Box */}
+            <div className="pt-3 border-t border-slate-200 dark:border-white/10 space-y-2">
+              <span className="font-mono text-[10px] text-slate-500 uppercase tracking-wider block">
+                Official Curricula Vitae:
+              </span>
+              <div className="grid grid-cols-2 gap-2 text-xs font-mono">
+                <a
+                  href="/docs/Tanmay_Kadlag_ML_Engineer.pdf"
+                  download
+                  className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-800 dark:text-amber-300 font-semibold text-center hover:bg-amber-500/20 transition flex items-center justify-center gap-1.5"
+                >
+                  <Download className="w-3.5 h-3.5" /> ML Resume
+                </a>
+                <a
+                  href="/docs/Tanmay_Kadlag_BigData_Engineer.pdf"
+                  download
+                  className="p-3 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-800 dark:text-cyan-300 font-semibold text-center hover:bg-cyan-500/20 transition flex items-center justify-center gap-1.5"
+                >
+                  <Download className="w-3.5 h-3.5" /> Big Data CV
+                </a>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Contact Form */}
+        {/* Right Column: Contact Dispatch Form */}
         <div className="lg:col-span-7">
           <form
             onSubmit={handleSubmit}
-            className="glass rounded-2xl p-6 sm:p-8 border border-white/10 space-y-5"
+            className="glass rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-white/10 shadow-lg space-y-4"
           >
+            <h3 className="font-display text-lg font-bold text-slate-900 dark:text-white">
+              Dispatch a Direct Message
+            </h3>
+
             <div className="grid sm:grid-cols-2 gap-4">
-              <div>
+              <div className="space-y-1.5">
                 <label
                   htmlFor="contact-name"
-                  className="block font-mono text-xs text-slate-400 uppercase mb-2"
+                  className="block font-mono text-xs text-slate-600 dark:text-slate-400 uppercase tracking-wider"
                 >
                   Your Name
                 </label>
@@ -143,63 +152,68 @@ export default function ContactSection() {
                   onChange={(e) =>
                     setFormData({ ...formData, name: e.target.value })
                   }
-                  className="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-white/10 text-white text-sm placeholder:text-slate-500 focus:border-cyan-500/50 focus:outline-none focus:ring-1 focus:ring-cyan-500/30 transition"
-                  placeholder="Jane Doe"
+                  placeholder="e.g. Priyanshu Sharma"
+                  className="w-full px-4 py-3 rounded-2xl bg-slate-100/80 dark:bg-slate-900/80 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-amber-500 dark:focus:border-cyan-400 text-sm transition"
                 />
               </div>
-              <div>
+
+              <div className="space-y-1.5">
                 <label
                   htmlFor="contact-subject"
-                  className="block font-mono text-xs text-slate-400 uppercase mb-2"
+                  className="block font-mono text-xs text-slate-600 dark:text-slate-400 uppercase tracking-wider"
                 >
-                  Subject
+                  Subject / Topic
                 </label>
                 <input
                   id="contact-subject"
                   type="text"
+                  required
                   value={formData.subject}
                   onChange={(e) =>
                     setFormData({ ...formData, subject: e.target.value })
                   }
-                  className="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-white/10 text-white text-sm placeholder:text-slate-500 focus:border-cyan-500/50 focus:outline-none focus:ring-1 focus:ring-cyan-500/30 transition"
-                  placeholder="Collaboration Opportunity"
+                  placeholder="e.g. Big Data / ML Opportunity"
+                  className="w-full px-4 py-3 rounded-2xl bg-slate-100/80 dark:bg-slate-900/80 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-amber-500 dark:focus:border-cyan-400 text-sm transition"
                 />
               </div>
             </div>
-            <div>
+
+            <div className="space-y-1.5">
               <label
                 htmlFor="contact-message"
-                className="block font-mono text-xs text-slate-400 uppercase mb-2"
+                className="block font-mono text-xs text-slate-600 dark:text-slate-400 uppercase tracking-wider"
               >
                 Message
               </label>
               <textarea
                 id="contact-message"
                 required
-                rows={5}
+                rows={4}
                 value={formData.message}
                 onChange={(e) =>
                   setFormData({ ...formData, message: e.target.value })
                 }
-                className="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-white/10 text-white text-sm placeholder:text-slate-500 focus:border-cyan-500/50 focus:outline-none focus:ring-1 focus:ring-cyan-500/30 transition resize-none"
-                placeholder="I'd love to discuss..."
+                placeholder="Share your goals, project details, or collaboration ideas..."
+                className="w-full px-4 py-3 rounded-2xl bg-slate-100/80 dark:bg-slate-900/80 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-amber-500 dark:focus:border-cyan-400 text-sm transition resize-none"
               />
             </div>
+
             <button
               type="submit"
-              className="w-full sm:w-auto px-8 py-3 rounded-xl font-semibold text-sm bg-gradient-to-r from-cyan-400 via-teal-400 to-emerald-400 text-slate-950 hover:brightness-110 transition flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/20"
+              className="w-full sm:w-auto px-7 py-3.5 rounded-2xl font-semibold text-sm bg-gradient-to-r from-amber-500 via-rose-500 to-cyan-500 text-white dark:text-slate-950 font-sans shadow-lg shadow-amber-500/20 hover:brightness-105 active:scale-98 transition flex items-center justify-center gap-2"
             >
               {sent ? (
-                "✓ Email Client Opened!"
+                <>
+                  <CheckCircle2 className="w-4 h-4 text-emerald-300" />
+                  <span>Opening Mail Client...</span>
+                </>
               ) : (
                 <>
-                  <Send className="w-4 h-4" /> Send Message
+                  <Send className="w-4 h-4" />
+                  <span>Send Message</span>
                 </>
               )}
             </button>
-            <p className="text-[11px] font-mono text-slate-500">
-              Opens your default email client with the message pre-filled.
-            </p>
           </form>
         </div>
       </div>
