@@ -44,6 +44,10 @@ export const PROFILE_DATA = {
   github: "https://github.com/takadlag",
   linkedin: "https://www.linkedin.com/in/tanmay-kadlag25",
   webHub: "https://linkedin-resume-hub.lovable.app/",
+  instagram: "https://www.instagram.com/tanmay_kadlag/",
+  instagramArt: "https://www.instagram.com/tanmaystarart/",
+  instagramHandle: "@tanmay_kadlag",
+  instagramArtHandle: "@tanmaystarart",
   heroMetrics: [
     { value: "500M+", label: "Records / Month", color: "text-cyan-400" },
     { value: "2TB+", label: "Delta Pipelines", color: "text-emerald-400" },

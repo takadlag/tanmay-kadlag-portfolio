@@ -13,6 +13,7 @@ import ArtifactGallery from "../components/ArtifactGallery";
 import ContactSection from "../components/ContactSection";
 import ScrollReveal from "../components/ScrollReveal";
 import BackToTop from "../components/BackToTop";
+import InstagramIcon from "../components/InstagramIcon";
 import { PROFILE_DATA } from "../data/portfolioData";
 
 export default function HomePage() {
@@ -100,6 +101,24 @@ export default function HomePage() {
               className="px-3.5 py-1.5 rounded-xl bg-slate-100 dark:bg-white/5 hover:bg-cyan-500/10 hover:text-cyan-600 dark:hover:text-cyan-400 text-slate-700 dark:text-slate-300 transition border border-slate-200/80 dark:border-white/5"
             >
               GitHub (takadlag)
+            </a>
+            <a
+              href={PROFILE_DATA.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3.5 py-1.5 rounded-xl bg-slate-100 dark:bg-white/5 hover:bg-rose-500/10 hover:text-rose-600 dark:hover:text-rose-400 text-slate-700 dark:text-slate-300 transition border border-slate-200/80 dark:border-white/5 flex items-center gap-1.5"
+            >
+              <InstagramIcon className="w-3.5 h-3.5 text-rose-500" />
+              <span>Instagram (@tanmay_kadlag)</span>
+            </a>
+            <a
+              href={PROFILE_DATA.instagramArt}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3.5 py-1.5 rounded-xl bg-slate-100 dark:bg-white/5 hover:bg-purple-500/10 hover:text-purple-600 dark:hover:text-purple-400 text-slate-700 dark:text-slate-300 transition border border-slate-200/80 dark:border-white/5 flex items-center gap-1.5"
+            >
+              <InstagramIcon className="w-3.5 h-3.5 text-purple-500" />
+              <span>Art (@tanmaystarart)</span>
             </a>
             <a
               href={PROFILE_DATA.linkedin}

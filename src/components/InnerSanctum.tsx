@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Award, Palette, Music, Languages, Sparkles, Maximize2, X } from "lucide-react";
+import InstagramIcon from "./InstagramIcon";
 
 interface Limb {
   sanskrit: string;
@@ -245,17 +246,29 @@ export default function InnerSanctum() {
           </p>
         </div>
 
-        {/* Card 2: Sketching */}
-        <div className="glass glass-hover rounded-3xl p-6 border border-slate-200 dark:border-white/10 space-y-3">
-          <div className="w-10 h-10 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-600 dark:text-cyan-400">
-            <Palette className="w-5 h-5" />
+        {/* Card 2: Sketching & Instagram Art */}
+        <div className="glass glass-hover rounded-3xl p-6 border border-slate-200 dark:border-white/10 space-y-3 flex flex-col justify-between">
+          <div className="space-y-3">
+            <div className="w-10 h-10 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-600 dark:text-cyan-400">
+              <Palette className="w-5 h-5" />
+            </div>
+            <h4 className="font-display font-bold text-base text-slate-900 dark:text-white">
+              Fine Landscape Art
+            </h4>
+            <p className="text-slate-600 dark:text-slate-400 text-xs leading-relaxed font-sans">
+              Practicing detailed landscape and temple sketching since Navodaya; cultivating observational discipline, proportion, and aesthetic patience.
+            </p>
           </div>
-          <h4 className="font-display font-bold text-base text-slate-900 dark:text-white">
-            Fine Landscape Art
-          </h4>
-          <p className="text-slate-600 dark:text-slate-400 text-xs leading-relaxed font-sans">
-            Practicing detailed landscape and temple sketching since Navodaya; cultivating observational discipline, proportion, and aesthetic patience.
-          </p>
+          <a
+            href="https://www.instagram.com/tanmaystarart/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-700 dark:text-rose-300 border border-rose-500/20 text-xs font-mono font-semibold transition mt-2 w-fit"
+            aria-label="View Tanmay's art portfolio on Instagram @tanmaystarart"
+          >
+            <InstagramIcon className="w-3.5 h-3.5 text-rose-500" />
+            <span>@tanmaystarart &rarr;</span>
+          </a>
         </div>
 
         {/* Card 3: Acoustic Guitar */}

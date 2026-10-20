@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Send, Mail, Phone, MapPin, Download, Check, Copy, HeartHandshake } from "lucide-react";
+import InstagramIcon from "./InstagramIcon";
 import { PROFILE_DATA } from "../data/portfolioData";
 
 export default function ContactSection() {
@@ -46,11 +47,25 @@ export default function ContactSection() {
       color: "text-emerald-600 dark:text-emerald-400",
     },
     {
+      customIcon: <InstagramIcon className="w-4 h-4" />,
+      label: "Instagram (Personal)",
+      value: PROFILE_DATA.instagramHandle,
+      href: PROFILE_DATA.instagram,
+      color: "text-rose-600 dark:text-rose-400",
+    },
+    {
+      customIcon: <InstagramIcon className="w-4 h-4" />,
+      label: "Instagram (Art & Sketches)",
+      value: PROFILE_DATA.instagramArtHandle,
+      href: PROFILE_DATA.instagramArt,
+      color: "text-purple-600 dark:text-purple-400",
+    },
+    {
       icon: MapPin,
       label: "Current Base",
       value: PROFILE_DATA.location,
       href: undefined,
-      color: "text-rose-600 dark:text-rose-400",
+      color: "text-cyan-600 dark:text-cyan-400",
     },
   ];
 
@@ -95,7 +110,7 @@ export default function ContactSection() {
                   className="p-3.5 rounded-2xl bg-slate-100/70 dark:bg-white/[0.02] border border-slate-200/80 dark:border-white/5 flex items-center gap-3.5"
                 >
                   <div className={`p-2.5 rounded-xl bg-white dark:bg-slate-900 shadow-sm ${c.color}`}>
-                    <c.icon className="w-4 h-4" />
+                    {c.icon ? <c.icon className="w-4 h-4" /> : c.customIcon}
                   </div>
                   <div>
                     <span className="font-mono text-[10px] text-slate-500 uppercase tracking-wider block font-semibold">
