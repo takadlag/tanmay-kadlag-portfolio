@@ -8,9 +8,14 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["'Plus Jakarta Sans'", "var(--font-geist-sans)", "system-ui", "sans-serif"],
+        display: ["'Space Grotesk'", "var(--font-geist-sans)", "system-ui", "sans-serif"],
+        mono: ["'JetBrains Mono'", "var(--font-geist-mono)", "monospace"],
+      },
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        obsidian: "#050811",
+        cyber: "#00f2fe",
       },
     },
   },
