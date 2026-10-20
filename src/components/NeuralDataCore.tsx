@@ -3,6 +3,17 @@
 import { useRef, useState } from "react";
 import { useTheme } from "../context/ThemeContext";
 
+interface NodeData {
+  id: string;
+  label: string;
+  targetId: string;
+  targetDesc: string;
+  x: number;
+  y: number;
+  color: string;
+  pulse: string;
+}
+
 export default function NeuralDataCore() {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
@@ -23,17 +34,69 @@ export default function NeuralDataCore() {
     setActiveNode(null);
   };
 
+  const scrollToTarget = (targetId: string) => {
+    const el = document.getElementById(targetId);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   const isDark = theme === "dark";
   const primaryCyan = isDark ? "#00f2fe" : "#0284c7";
   const sacredGold = isDark ? "#f59e0b" : "#b45309";
   const emeraldColor = isDark ? "#10b981" : "#059669";
 
-  const nodes = [
-    { id: "lakehouse", label: "2TB+ Delta Lakehouse", x: 150, y: 70, color: primaryCyan, pulse: "0.2s" },
-    { id: "streaming", label: "500M+ Ingestion Core", x: 340, y: 90, color: sacredGold, pulse: "0.8s" },
-    { id: "nexus", label: "Nexus Neural Network", x: 380, y: 280, color: primaryCyan, pulse: "1.4s" },
-    { id: "soq", label: "SOQ Time-Series Engine", x: 180, y: 350, color: emeraldColor, pulse: "2.0s" },
-    { id: "mlops", label: "Observability Telemetry", x: 70, y: 220, color: sacredGold, pulse: "2.6s" },
+  const nodes: NodeData[] = [
+    {
+      id: "lakehouse",
+      label: "2TB+ Delta Lakehouse",
+      targetId: "projects",
+      targetDesc: "Navigate to Medallion Lakehouse Case Study",
+      x: 150,
+      y: 70,
+      color: primaryCyan,
+      pulse: "0.2s",
+    },
+    {
+      id: "streaming",
+      label: "500M+ Ingestion Core",
+      targetId: "experience",
+      targetDesc: "Navigate to Deloitte APAC Ingestion Chronicles",
+      x: 340,
+      y: 90,
+      color: sacredGold,
+      pulse: "0.8s",
+    },
+    {
+      id: "nexus",
+      label: "Nexus Neural Network",
+      targetId: "projects",
+      targetDesc: "Navigate to APAC Model Industrialization",
+      x: 380,
+      y: 280,
+      color: primaryCyan,
+      pulse: "1.4s",
+    },
+    {
+      id: "soq",
+      label: "SOQ Time-Series Engine",
+      targetId: "projects",
+      targetDesc: "Navigate to SOQ Algorithmic Optimization",
+      x: 180,
+      y: 350,
+      color: emeraldColor,
+      pulse: "2.0s",
+    },
+    {
+      id: "mlops",
+      label: "Observability Telemetry",
+      targetId: "skills",
+      targetDesc: "Navigate to Technical Skills & Credential Vault",
+      x: 70,
+      y: 220,
+      color: sacredGold,
+      pulse: "2.6s",
+    },
   ];
 
   return (
@@ -46,7 +109,7 @@ export default function NeuralDataCore() {
         transform: `perspective(1000px) rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)`,
       }}
       aria-label="Interactive Neural Data Core and Pipeline Architecture Diagram"
-      role="img"
+      role="region"
     >
       {/* Background Radial Glow */}
       <div
@@ -141,7 +204,21 @@ export default function NeuralDataCore() {
         ))}
 
         {/* Central Neural Data Hub Core */}
-        <g className="cursor-pointer" onClick={() => setActiveNode("core")}>
+        <g
+          className="cursor-pointer"
+          tabIndex={0}
+          role="button"
+          aria-label="Central Prana Core — Navigate to Ashtanga Philosophy"
+          onClick={() => {
+            setActiveNode("core");
+            scrollToTarget("philosophy");
+          }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              scrollToTarget("philosophy");
+            }
+          }}
+        >
           <circle
             cx="230"
             cy="230"
@@ -180,6 +257,15 @@ export default function NeuralDataCore() {
             <g
               key={node.id}
               className="cursor-pointer transition-all duration-200"
+              tabIndex={0}
+              role="button"
+              aria-label={`${node.label}: ${node.targetDesc}`}
+              onClick={() => scrollToTarget(node.targetId)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  scrollToTarget(node.targetId);
+                }
+              }}
               onMouseEnter={() => setActiveNode(node.id)}
               onMouseLeave={() => setActiveNode(null)}
             >
@@ -219,14 +305,16 @@ export default function NeuralDataCore() {
         })}
       </svg>
 
-      {/* Real-time Subtitle Telemetry Pill */}
+      {/* Real-time Subtitle Telemetry Pill with Click-to-Jump cue */}
       <div className="absolute bottom-2 inset-x-4 text-center">
-        <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-mono glass border border-amber-500/20 text-slate-700 dark:text-slate-300 shadow-sm">
+        <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-mono glass border border-amber-500/20 text-slate-700 dark:text-slate-300 shadow-sm cursor-pointer hover:border-cyan-400 transition">
           <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
           <span>
             {activeNode
-              ? `Inspecting: ${nodes.find((n) => n.id === activeNode)?.label || "Central Prana Core"}`
-              : "Interactive Neural Data Core // Live System Geometry"}
+              ? activeNode === "core"
+                ? "Central Core: Jump to Ashtanga Philosophy →"
+                : `${nodes.find((n) => n.id === activeNode)?.targetDesc} →`
+              : "Click any node to navigate corresponding architecture"}
           </span>
         </span>
       </div>

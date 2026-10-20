@@ -62,13 +62,13 @@ export default function ArtifactGallery() {
         <div className="space-y-2">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 text-xs font-mono font-medium">
             <ImageIcon className="w-3.5 h-3.5 text-cyan-500" />
-            <span>VISUAL VAULT // VERIFIED ARTIFACTS &amp; DOCUMENTATION</span>
+            <span>COMPLETE VISUAL ARCHIVE // EVIDENCE &amp; ARTIFACT LEDGER</span>
           </div>
           <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-            Original Certifications &amp; <span className="gradient-text font-serif italic">Photo Artifacts</span>
+            Complete Visual Archive &amp; <span className="gradient-text font-serif italic">Evidence Ledger</span>
           </h2>
           <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base max-w-2xl font-sans">
-            Direct, unedited visual documentation of honors, international delegations, architectural diagrams, and yoga championships.
+            A comprehensive, unedited archive of verified client honors, international delegations, architectural blueprints, and sports championships—complementing the contextual stories above.
           </p>
         </div>
 

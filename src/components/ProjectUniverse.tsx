@@ -13,7 +13,6 @@ import {
 } from "lucide-react";
 import {
   FLAGSHIP_PROJECTS,
-  FlagshipProject,
   APAC_MARKETS,
   MEDALLION_LAYERS,
 } from "../data/portfolioData";
@@ -22,7 +21,7 @@ export default function ProjectUniverse() {
   const [selectedProjectId, setSelectedProjectId] = useState<string>("medallion-lakehouse");
   const [selectedMedallionStage, setSelectedMedallionStage] = useState<"bronze" | "silver" | "gold">("silver");
   const [selectedMarketKey, setSelectedMarketKey] = useState<string>("ph");
-  const [modalProject, setModalProject] = useState<FlagshipProject | null>(null);
+  const [modalImage, setModalImage] = useState<{ src: string; alt: string; caption: string } | null>(null);
 
   const activeProject =
     FLAGSHIP_PROJECTS.find((p) => p.id === selectedProjectId) || FLAGSHIP_PROJECTS[0];
@@ -57,7 +56,7 @@ export default function ProjectUniverse() {
                 onClick={() => setSelectedProjectId(proj.id)}
                 className={`px-3.5 py-2 rounded-xl text-xs font-mono font-semibold transition-all duration-200 flex items-center gap-2 ${
                   isSelected
-                    ? "bg-amber-500 text-white dark:text-slate-950 shadow-md ring-1 ring-amber-500/30"
+                    ? "bg-amber-500 text-white dark:text-slate-950 shadow-md ring-1 ring-amber-500/30 font-bold"
                     : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
                 }`}
                 aria-pressed={isSelected}
@@ -90,12 +89,18 @@ export default function ProjectUniverse() {
 
           <div className="flex items-center gap-3 shrink-0">
             <button
-              onClick={() => setModalProject(activeProject)}
-              className="px-4 py-2.5 rounded-xl text-xs font-mono font-bold glass glass-hover border border-cyan-500/30 text-cyan-700 dark:text-cyan-300 flex items-center gap-2"
+              onClick={() =>
+                setModalImage({
+                  src: activeProject.primaryImage,
+                  alt: activeProject.title,
+                  caption: activeProject.imageCaption,
+                })
+              }
+              className="px-4 py-2.5 rounded-xl text-xs font-mono font-bold glass glass-hover border border-cyan-500/30 text-cyan-700 dark:text-cyan-300 flex items-center gap-2 shadow-sm"
               aria-label={`Open detailed architecture blueprint for ${activeProject.title}`}
             >
               <Maximize2 className="w-3.5 h-3.5" />
-              <span>Inspect Architecture Blueprint</span>
+              <span>Inspect Full-Res Blueprint</span>
             </button>
           </div>
         </div>
@@ -119,6 +124,55 @@ export default function ProjectUniverse() {
               {activeProject.role}
             </p>
           </div>
+        </div>
+
+        {/* Prominent Contextual Visual: Architecture Blueprint or Production Screenshot */}
+        <div className="p-5 sm:p-6 rounded-3xl bg-slate-100/60 dark:bg-slate-900/40 border border-slate-200/80 dark:border-white/10 space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+              <span className="font-mono text-xs font-bold text-cyan-700 dark:text-cyan-400 uppercase tracking-widest block">
+                TECHNICAL EVIDENCE &bull; LIVE ARCHITECTURE BLUEPRINT
+              </span>
+              <p className="text-xs text-slate-500 dark:text-slate-400">
+                Click the preview below to inspect with full zoom and annotations:
+              </p>
+            </div>
+            <span className="px-3 py-1 rounded-full text-xs font-mono bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border border-cyan-500/20 shrink-0">
+              Verified Production Artifact
+            </span>
+          </div>
+
+          <div
+            onClick={() =>
+              setModalImage({
+                src: activeProject.primaryImage,
+                alt: activeProject.title,
+                caption: activeProject.imageCaption,
+              })
+            }
+            className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden bg-slate-950 border border-slate-200 dark:border-white/10 cursor-pointer group shadow-xl"
+          >
+            <Image
+              src={activeProject.primaryImage}
+              alt={activeProject.title}
+              fill
+              sizes="(max-width: 1200px) 100vw, 80vw"
+              className="object-contain group-hover:scale-102 transition duration-500"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-between p-4">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono bg-white/20 text-white backdrop-blur-md">
+                <Maximize2 className="w-3.5 h-3.5" /> Tap to Inspect High-Resolution Blueprint
+              </span>
+              <span className="text-xs font-mono text-amber-300">
+                {activeProject.tag}
+              </span>
+            </div>
+          </div>
+
+          <p className="text-slate-600 dark:text-slate-400 text-xs italic font-serif leading-relaxed px-1">
+            {activeProject.imageCaption}
+          </p>
         </div>
 
         {/* Dynamic Interactive Stage: Medallion Architecture Flow or APAC Market Matrix */}
@@ -151,7 +205,7 @@ export default function ProjectUniverse() {
               >
                 <div className="flex items-center justify-between">
                   <span className="px-2.5 py-0.5 rounded text-[10px] font-mono bg-amber-500/20 text-amber-300 border border-amber-500/40">
-                    STAGE 01 • INGEST
+                    STAGE 01 &bull; INGEST
                   </span>
                   <span className="w-2 h-2 rounded-full bg-amber-400" />
                 </div>
@@ -175,7 +229,7 @@ export default function ProjectUniverse() {
               >
                 <div className="flex items-center justify-between">
                   <span className="px-2.5 py-0.5 rounded text-[10px] font-mono bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">
-                    STAGE 02 • VALIDATE &amp; CDC
+                    STAGE 02 &bull; VALIDATE &amp; CDC
                   </span>
                   <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
                 </div>
@@ -199,7 +253,7 @@ export default function ProjectUniverse() {
               >
                 <div className="flex items-center justify-between">
                   <span className="px-2.5 py-0.5 rounded text-[10px] font-mono bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
-                    STAGE 03 • STAR SCHEMA
+                    STAGE 03 &bull; STAR SCHEMA
                   </span>
                   <span className="w-2 h-2 rounded-full bg-emerald-400" />
                 </div>
@@ -222,7 +276,7 @@ export default function ProjectUniverse() {
                 <p className="text-slate-300 font-sans text-xs">{activeMedallion.detail}</p>
               </div>
               <span className="px-3 py-1.5 rounded-lg bg-white/5 text-amber-300 border border-white/10 shrink-0">
-                PySpark • Delta Lake
+                PySpark &bull; Delta Lake
               </span>
             </div>
           </div>
@@ -289,10 +343,10 @@ export default function ProjectUniverse() {
           </div>
         )}
 
-        {/* Quantified Verified Results Grid */}
-        <div className="space-y-3">
+        {/* Quantified Verified Results Grid with Secondary Production Visual */}
+        <div className="space-y-4">
           <span className="font-mono text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 block">
-            Verified Quantitative Outcomes &amp; Engineering Impact
+            Verified Quantitative Outcomes &amp; Production Telemetry
           </span>
           <div className="grid sm:grid-cols-3 gap-4">
             {activeProject.results.map((res, i) => (
@@ -312,6 +366,44 @@ export default function ProjectUniverse() {
               </div>
             ))}
           </div>
+
+          {/* Secondary Telemetry Screenshot if present */}
+          {activeProject.secondaryImage && (
+            <div className="p-4 rounded-2xl bg-slate-100/60 dark:bg-slate-900/40 border border-slate-200/80 dark:border-white/10 flex flex-col md:flex-row items-center gap-5">
+              <div
+                onClick={() =>
+                  setModalImage({
+                    src: activeProject.secondaryImage!,
+                    alt: "Production Telemetry Dashboard",
+                    caption: `Supporting Telemetry & Operational Analytics for ${activeProject.title}`,
+                  })
+                }
+                className="relative w-full md:w-56 aspect-[16/10] rounded-xl overflow-hidden bg-slate-950 border border-slate-200 dark:border-white/10 shrink-0 cursor-pointer group shadow-md"
+              >
+                <Image
+                  src={activeProject.secondaryImage}
+                  alt="Production Telemetry Dashboard"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 224px"
+                  className="object-cover group-hover:scale-105 transition duration-300"
+                />
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                  <Maximize2 className="w-4 h-4 text-white" />
+                </div>
+              </div>
+              <div className="space-y-1">
+                <span className="font-mono text-[10px] text-emerald-700 dark:text-emerald-400 font-bold uppercase tracking-wider block">
+                  SUPPORTING PRODUCTION EVIDENCE
+                </span>
+                <h5 className="font-display font-bold text-sm text-slate-900 dark:text-white">
+                  Live Dashboard Telemetry &amp; Operational Metrics
+                </h5>
+                <p className="text-slate-600 dark:text-slate-400 text-xs font-sans leading-relaxed">
+                  Real-time query performance, category revenue aggregation, and model drift telemetry verified directly in the client environment.
+                </p>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Engineering Decisions & Technologies */}
@@ -348,29 +440,29 @@ export default function ProjectUniverse() {
         </div>
       </div>
 
-      {/* Full Architectural Blueprint Inspection Modal */}
-      {modalProject && (
+      {/* Full Architectural Blueprint / Telemetry Inspection Modal */}
+      {modalImage && (
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-50 bg-black/85 modal-backdrop flex items-center justify-center p-4 animate-in fade-in duration-200"
-          onClick={() => setModalProject(null)}
+          className="fixed inset-0 z-50 bg-black/90 modal-backdrop flex items-center justify-center p-4 animate-in fade-in duration-200"
+          onClick={() => setModalImage(null)}
         >
           <div
-            className="relative max-w-5xl w-full glass rounded-3xl overflow-hidden border border-cyan-500/30 p-6 sm:p-8 space-y-6 max-h-[90vh] overflow-y-auto"
+            className="relative max-w-5xl w-full glass rounded-3xl overflow-hidden border border-cyan-500/30 p-6 sm:p-8 space-y-4 max-h-[90vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-4">
               <div>
                 <span className="font-mono text-xs text-cyan-600 dark:text-cyan-400 uppercase tracking-widest font-bold">
-                  {modalProject.tag}
+                  FULL-RESOLUTION TECHNICAL BLUEPRINT
                 </span>
-                <h3 className="font-display text-2xl font-bold text-slate-900 dark:text-white mt-1">
-                  {modalProject.title} — Architecture Blueprint
+                <h3 className="font-display text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mt-1">
+                  {modalImage.alt}
                 </h3>
               </div>
               <button
-                onClick={() => setModalProject(null)}
+                onClick={() => setModalImage(null)}
                 className="p-2.5 rounded-xl bg-slate-200 dark:bg-white/10 hover:bg-slate-300 dark:hover:bg-white/20 text-slate-800 dark:text-white transition"
                 aria-label="Close architecture modal"
               >
@@ -378,11 +470,10 @@ export default function ProjectUniverse() {
               </button>
             </div>
 
-            {/* Primary Blueprint Image */}
-            <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden bg-slate-950 border border-slate-800">
+            <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden bg-slate-950 border border-slate-800 flex items-center justify-center">
               <Image
-                src={modalProject.primaryImage}
-                alt={modalProject.title}
+                src={modalImage.src}
+                alt={modalImage.alt}
                 fill
                 className="object-contain"
                 priority
@@ -390,24 +481,8 @@ export default function ProjectUniverse() {
             </div>
 
             <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed font-sans">
-              {modalProject.imageCaption}
+              {modalImage.caption}
             </p>
-
-            {modalProject.secondaryImage && (
-              <div className="space-y-2 pt-2 border-t border-slate-200 dark:border-white/10">
-                <span className="font-mono text-xs text-slate-500 uppercase tracking-wider block">
-                  Production Telemetry / Supporting Screenshot
-                </span>
-                <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden bg-slate-950 border border-slate-800">
-                  <Image
-                    src={modalProject.secondaryImage}
-                    alt="Supporting Telemetry Dashboard"
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-              </div>
-            )}
           </div>
         </div>
       )}

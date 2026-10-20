@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Award, Palette, Music, Languages, Sparkles } from "lucide-react";
+import Image from "next/image";
+import { Award, Palette, Music, Languages, Sparkles, Maximize2, X } from "lucide-react";
 
 interface Limb {
   sanskrit: string;
@@ -12,6 +13,7 @@ interface Limb {
 
 export default function InnerSanctum() {
   const [activeLimbIndex, setActiveLimbIndex] = useState(0);
+  const [showYogaPhotoModal, setShowYogaPhotoModal] = useState(false);
 
   const limbs: Limb[] = [
     {
@@ -87,7 +89,7 @@ export default function InnerSanctum() {
             The Yogic Foundation of <span className="sacred-gold-text font-serif italic">High-Scale Systems</span>
           </h2>
           <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base max-w-2xl font-sans">
-            Sparked in Class VIII by Swami Vivekananda&apos;s writings and forged with the VNIT Nagpur Yoga Team under Awadhesh Sir. High-velocity systems require absolute inner stillness.
+            Sparked in Class VIII by Swami Vivekananda&apos;s writings and forged with the VNIT Nagpur Yoga Team under Awadhesh Sir. High-velocity distributed systems require absolute inner stillness.
           </p>
         </div>
 
@@ -180,6 +182,54 @@ export default function InnerSanctum() {
         </div>
       </div>
 
+      {/* Integrated Photographic Evidence: National Stage & Inter-NIT Championship */}
+      <div className="glass rounded-3xl p-6 sm:p-8 lg:p-10 border border-slate-200/80 dark:border-white/10 shadow-xl">
+        <div className="grid lg:grid-cols-12 gap-8 items-center">
+          <div className="lg:col-span-5 space-y-3">
+            <div
+              onClick={() => setShowYogaPhotoModal(true)}
+              className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-slate-950 border border-amber-500/30 group cursor-pointer shadow-lg"
+            >
+              <Image
+                src="/images/journey/yoga-silchar-stage.png"
+                alt="All India Inter-NIT Yoga Tournament at NIT Silchar & VNIT IG Gold"
+                fill
+                sizes="(max-width: 1024px) 100vw, 40vw"
+                className="object-cover group-hover:scale-105 transition duration-500"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-between p-4">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono bg-white/20 text-white backdrop-blur-md">
+                  <Maximize2 className="w-3.5 h-3.5" /> Expand Photograph
+                </span>
+                <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-amber-500 text-slate-950 font-bold">
+                  NIT Silchar 2019
+                </span>
+              </div>
+            </div>
+            <p className="text-slate-500 dark:text-slate-400 text-xs italic font-serif leading-relaxed px-1">
+              On stage performing advanced Chakrasana at the 2019 All India Inter-NIT Yoga Championship (NIT Silchar) representing VNIT Nagpur.
+            </p>
+          </div>
+
+          <div className="lg:col-span-7 space-y-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-700 dark:text-amber-300 text-xs font-mono font-medium">
+              <Award className="w-3.5 h-3.5" />
+              <span>VNIT IG GOLD MEDALIST &bull; ALL INDIA INTER-NIT COMPETITOR</span>
+            </div>
+            <h3 className="font-display text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">
+              Mindful Equilibrium Under Sustained Production Pressure
+            </h3>
+            <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base font-sans leading-relaxed">
+              Selected to represent Visvesvaraya National Institute of Technology (VNIT), Nagpur among 31 National Institutes of Technology across India at the 2019 All India Inter-NIT Yoga Tournament hosted at NIT Silchar, Assam. Concurrently claimed the Gold Medal at VNIT&apos;s Institute Gathering (IG).
+            </p>
+            <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base font-sans leading-relaxed">
+              During the 2020 COVID-19 pandemic, I conducted virtual yoga and breathwork sessions for campus students to sustain collective physical and mental composure. That same discipline today directly informs my engineering mindset when managing mission-critical enterprise pipeline incidents.
+            </p>
+          </div>
+        </div>
+      </div>
+
       {/* Formative Disciplines Grid */}
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Card 1: Yoga Gold */}
@@ -234,6 +284,53 @@ export default function InnerSanctum() {
           </p>
         </div>
       </div>
+
+      {/* Yoga Photo Modal */}
+      {showYogaPhotoModal && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          className="fixed inset-0 z-50 bg-black/90 modal-backdrop flex items-center justify-center p-4 animate-in fade-in duration-200"
+          onClick={() => setShowYogaPhotoModal(false)}
+        >
+          <div
+            className="relative max-w-4xl w-full glass rounded-3xl overflow-hidden border border-amber-500/30 p-6 sm:p-8 space-y-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-3">
+              <div>
+                <span className="font-mono text-xs text-amber-600 dark:text-cyan-400 uppercase tracking-widest font-bold">
+                  NATIONAL CHAMPIONSHIP // VNIT YOGA SQUAD
+                </span>
+                <h3 className="font-display text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mt-0.5">
+                  All India Inter-NIT Yoga Tournament (NIT Silchar) &amp; IG Gold
+                </h3>
+              </div>
+              <button
+                onClick={() => setShowYogaPhotoModal(false)}
+                className="p-2.5 rounded-xl bg-slate-200 dark:bg-white/10 hover:bg-slate-300 dark:hover:bg-white/20 text-slate-800 dark:text-white transition"
+                aria-label="Close photo preview"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="relative aspect-[16/10] w-full max-h-[65vh] rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center">
+              <Image
+                src="/images/journey/yoga-silchar-stage.png"
+                alt="All India Inter-NIT Yoga Tournament at NIT Silchar"
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
+
+            <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed font-sans">
+              Representing VNIT Nagpur among 31 NITs (October 2019) at NIT Silchar, Assam. Demonstrating advanced asana progression and mindful mastery forged under Awadhesh Sir.
+            </p>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

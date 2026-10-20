@@ -7,6 +7,9 @@ export interface TimelineEvent {
   description: string;
   dotColor: string;
   highlights?: { label: string; text: string; color: string }[];
+  image?: string;
+  imageCaption?: string;
+  imageBadge?: string;
 }
 
 export interface MarketNode {
@@ -61,6 +64,10 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     description:
       "Inspired in 4th/5th grade by my cousin sister at JNV Ahmednagar, I prepared relentlessly at Dere English Medium School (Sangamner) to earn one of 40 seats at Jawahar Navodaya Vidyalaya (JNV) Takli Dhokeshwar. Hostel life forged discipline through morning physical training, stage speaking at assemblies, evening sports (basketball, volleyball, kabaddi, kho-kho, judo), and resource gratitude during local water shortages.",
     dotColor: "bg-amber-400",
+    image: "/images/journey/jnv-collage.png",
+    imageCaption:
+      "Formative Navodaya years at JNV Takli Dhokeshwar — 97% 10th Board Batch Topper, National Taekwondo Silver Medal, fine arts & campus discipline.",
+    imageBadge: "JNV Batch Topper (97%)",
     highlights: [
       {
         label: "ACADEMIC PEAK",
@@ -88,6 +95,10 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     description:
       "Selected in 9th grade to represent India in the JENESYS 2.0 (Japan-East Asia Network of Exchange for Students and Youths) program organized by the Japan International Cooperation Center (JICE). A transformative week in Japan exploring technological innovation, heritage temples, and warm host-family hospitality broadened my global perspective.",
     dotColor: "bg-rose-400",
+    image: "/images/journey/jenesys-japan.png",
+    imageCaption:
+      "Representing India as a Youth Envoy in Tokyo & across Japan through JENESYS 2.0 (JICE 2014) — cultural diplomacy and advanced technology immersion.",
+    imageBadge: "Japan Envoy (2014)",
   },
   {
     id: "vnit",
@@ -98,6 +109,10 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     description:
       "Secured admission via JEE Main into the rigorous Electrical & Electronics Engineering (EEE) department at Visvesvaraya National Institute of Technology (VNIT), Nagpur (Enrollment No. BT18EE084), balancing engineering coursework with campus leadership and competitive yoga.",
     dotColor: "bg-purple-400",
+    image: "/images/journey/vnit-convocation.png",
+    imageCaption:
+      "VNIT Nagpur B.Tech EEE Convocation & Campus Leadership across E-Cell, Consortium '19 CEO Competition, and Inter-NIT yoga.",
+    imageBadge: "VNIT '22 Convocation",
     highlights: [
       {
         label: "E-CELL & CONSORTIUM '19",
@@ -125,6 +140,10 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     description:
       "Preprocessed and feature-engineered massive FMCG datasets using PySpark and Scala to boost churn and sales recommendation accuracy by up to 30%. Automated Excel reporting in Scala (-30% manual effort), optimized Power BI backend queries (+25% refresh speed), streamlined Apache Spark ETL workflows (+40% data readiness), and built traffic-light model health monitoring systems.",
     dotColor: "bg-emerald-400",
+    image: "/images/awards/move-the-dot-nov2025.png",
+    imageCaption:
+      "Production ETL optimization and automated observability engineering recognized with Deloitte 'Move the Dot' leadership honors.",
+    imageBadge: "Move the Dot — Team",
   },
   {
     id: "deloitte-pune",
@@ -135,6 +154,10 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     description:
       "Leading national-scale predictive pipeline industrialization on Azure Data Factory, Databricks Workflows, and Delta Lake. Processing 500M+ records/month across 2TB+ pipelines, cutting deployment cycles by 30%, lifting new clustering/ensemble model performance by 10%, increasing pipeline efficiency by 20%, reducing FMCG forecast errors by 15%, and spearheading multi-country ML rollouts across PH, ID, VN, and BD.",
     dotColor: "bg-cyan-400 shadow-[0_0_15px_#00f2fe]",
+    image: "/images/awards/unilever-uniops-cert.jpeg",
+    imageCaption:
+      "Unilever UniOps Global Leadership Recognition awarded by Shilpa Murthy for outstanding commitment to the multi-country iQ Project.",
+    imageBadge: "UniOps Client Honor",
   },
 ];
 
@@ -529,28 +552,52 @@ export const TECH_STACK = [
   },
 ];
 
-export const CERTIFICATIONS = [
+export interface CertificationItem {
+  title: string;
+  issuer: string;
+  date: string;
+  credentialId?: string;
+  image?: string;
+  badge?: string;
+}
+
+export const CERTIFICATIONS: CertificationItem[] = [
   {
     title: "Machine Learning Specialization (3 Courses)",
     issuer:
-      "Stanford University & DeepLearning.AI (Andrew Ng) — Supervised, Unsupervised, Advanced Learning Algorithms",
+      "Stanford University & DeepLearning.AI (Andrew Ng) — Supervised, Unsupervised & Advanced Learning Algorithms",
     date: "Aug 2025",
+    image: "/images/awards/stanford-ml-specialization.png",
+    badge: "Stanford DeepLearning.AI",
   },
   {
     title: "Microsoft Certified: Azure AI Fundamentals (AI-900)",
-    issuer: "Microsoft • Credential ID: FBDAFE2BFAE264F3",
+    issuer: "Microsoft Corporation • Credential ID: FBDAFE2BFAE264F3",
     date: "Sep 2025",
+    credentialId: "FBDAFE2BFAE264F3",
+    image: "/images/awards/azure-ai-900.png",
+    badge: "Microsoft Certified",
   },
   {
     title: "Databricks Accredited Databricks Fundamentals",
-    issuer: "Databricks Academy",
+    issuer: "Databricks Academy — Lakehouse, Delta Lake & Apache Spark Foundations",
     date: "Jul 2025",
+    image: "/images/awards/databricks-fundamentals.png",
+    badge: "Databricks Accredited",
+  },
+  {
+    title: "HackerRank 5-Star Python & LeetCode Rewind",
+    issuer: "HackerRank (5★ Python, 3★ SQL, 2★ C++) & LeetCode 70.6% Acceptance",
+    date: "2025",
+    image: "/images/awards/hackerrank-leetcode-2025.png",
+    badge: "Competitive Algorithms",
   },
   {
     title: "IBM Data Science Suite & LinkedIn AI Foundations",
     issuer:
-      "Python for Data Science, AI & Dev • Data Science Methodology • Tools for Data Science • Thinking Machines",
+      "Python for Data Science, AI & Dev • Data Science Methodology • Tools for Data Science",
     date: "2024",
+    badge: "IBM Professional",
   },
 ];
 
