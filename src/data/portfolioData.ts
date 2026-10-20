@@ -247,54 +247,284 @@ export const MEDALLION_LAYERS = {
   },
 };
 
+export interface FlagshipProject {
+  id: string;
+  tag: string;
+  title: string;
+  subtitle: string;
+  summary: string;
+  problem: string;
+  role: string;
+  architectureStages: { name: string; desc: string; tech: string }[];
+  dataFlow: string;
+  technologies: string[];
+  decisions: string[];
+  results: { label: string; value: string; desc: string }[];
+  primaryImage: string;
+  secondaryImage?: string;
+  imageCaption: string;
+}
+
+export const FLAGSHIP_PROJECTS: FlagshipProject[] = [
+  {
+    id: "medallion-lakehouse",
+    tag: "DATA LAKEHOUSE & CDC PIPELINES",
+    title: "Post-Merger FMCG Medallion Lakehouse",
+    subtitle: "Enterprise Delta Lake on Databricks with CDC Ingestion & AI BI",
+    summary:
+      "Architected an end-to-end ACID-compliant Medallion Lakehouse on Databricks to consolidate post-merger disparate sales records across cloud storage, enabling sub-second dimensional queries and natural-language executive exploration via Databricks Genie.",
+    problem:
+      "Following a major post-merger consolidation simulation, sales, inventory, and customer records were isolated across uncoordinated AWS S3 CSV buckets. Downstream business users faced heavy reporting delays, lack of idempotency during updates, and inconsistent historical backfills.",
+    role: "Lead Data Engineer • Architected the 3-tier Medallion architecture, PySpark Delta Lake transformations, Change Data Capture (CDC) upsert logic, and star schema modeling.",
+    architectureStages: [
+      {
+        name: "Bronze (Landing Zone)",
+        desc: "Ingests raw post-merger CSV files from AWS S3. Maintains strict historical append-only archives with file origin and timestamp audit metadata.",
+        tech: "AWS S3 • PySpark • Auto Loader",
+      },
+      {
+        name: "Silver (Curated & Validated)",
+        desc: "Executes data cleansing, type casting, duplicate elimination, and Change Data Capture (CDC) upserts using Delta Lake MERGE INTO statements.",
+        tech: "Delta Lake • PySpark • CDC Logic",
+      },
+      {
+        name: "Gold (Dimensional Modeling)",
+        desc: "Builds high-performance Star Schema with Fact (Sales) and Dimensions (Customer, Product, Store). Powers Databricks SQL dashboards & Genie natural-language BI.",
+        tech: "Databricks SQL • Genie AI • Star Schema",
+      },
+    ],
+    dataFlow:
+      "Raw CSVs in Amazon S3 Landing Zone → PySpark Ingestion to Bronze Delta → Automated Schema Enforcement & CDC Upserts into Silver Delta → Aggregation & Star Schema Modeling in Gold Delta → Databricks SQL & Genie Query Serving.",
+    technologies: [
+      "Databricks",
+      "Delta Lake",
+      "Apache Spark",
+      "PySpark",
+      "AWS S3",
+      "CDC (MERGE INTO)",
+      "Databricks Genie",
+      "Star Schema",
+    ],
+    decisions: [
+      "Enforced schema validation at the Bronze-to-Silver boundary to catch schema drift from merged entities before corrupting analytics.",
+      "Optimized Silver-to-Gold upsert performance by applying partition pruning and Z-Ordering on primary customer and product keys.",
+      "Introduced Databricks Genie to allow non-technical commercial directors to query 119B+ revenue data in natural language without writing SQL.",
+    ],
+    results: [
+      {
+        label: "Unified Revenue Analyzed",
+        value: "119.93B",
+        desc: "Total revenue unified across merged entities in Databricks SQL.",
+      },
+      {
+        label: "Product Units Tracked",
+        value: "39.03M",
+        desc: "Granular sales volume cataloged across multi-category product lines.",
+      },
+      {
+        label: "ACID Idempotency",
+        value: "100%",
+        desc: "Zero duplicate records across historical backfills & daily incremental updates.",
+      },
+    ],
+    primaryImage: "/images/projects/databricks-medallion.jpeg",
+    secondaryImage: "/images/projects/databricks-sales-dashboard.png",
+    imageCaption:
+      "Production Databricks Medallion Architecture Blueprint & Live Sales Dashboard Tracking 119.93B Revenue.",
+  },
+  {
+    id: "apac-nerve-centre",
+    tag: "MULTI-MARKET ML INDUSTRIALIZATION",
+    title: "APAC iQ Nerve Centre & Model Industrialization",
+    subtitle: "Scaling ML Forecasting & Recommendation Engines Across 5 Asian Markets",
+    summary:
+      "Engineered and industrialized production predictive pipelines on Azure Data Factory and Databricks Workflows across 5 Asia-Pacific markets (PH, VN, ID, BD, TH), powering autonomous FMCG replenishment for global enterprise operations.",
+    problem:
+      "Enterprise FMCG distributors across Asia-Pacific relied on outdated, fragmented heuristic ordering rules that caused high stock-out rates and uneven supply chain lead times. The business required localized, algorithmic ordering models deployed without operational downtime.",
+    role: "ML & Big Data Engineer • Deloitte iQ Innovation Team; Track Lead for Bangladesh SOQ & MLOps; coordinated with business analysts and client leadership across global time zones.",
+    architectureStages: [
+      {
+        name: "Pipeline Ingestion & Preprocessing",
+        desc: "Automated ADF pipelines extracting 500M+ monthly distributor records with automated validation and transformation.",
+        tech: "Azure Data Factory • ADLS Gen2 • PySpark",
+      },
+      {
+        name: "Market-Specific ML Modeling",
+        desc: "Parallelized Databricks workflows training Nexus Neural Networks (PH), Exponential Smoothing (VN), and Lasso Regression (ID).",
+        tech: "Databricks Workflows • PyTorch / Scikit-Learn",
+      },
+      {
+        name: "Command & Control Dashboard",
+        desc: "Unified executive telemetry monitoring model hit rates, forecast error reduction, and pipeline SLA execution.",
+        tech: "MLOps Platform • Power BI • Looker",
+      },
+    ],
+    dataFlow:
+      "Distributor ERPs & POS Ingestion → Azure Data Factory Scheduled Triggers → Delta Lake Transformations → Market Model Inference Jobs → Suggested Order Feeds Dispatched to Field Distributors.",
+    technologies: [
+      "Azure Data Factory (ADF)",
+      "Databricks Workflows",
+      "PySpark",
+      "Delta Lake",
+      "Neural Networks (Nexus)",
+      "Exponential Smoothing",
+      "Lasso Regression",
+      "MLOps Telemetry",
+    ],
+    decisions: [
+      "Engineered flexible pipeline templates that accommodate market-specific algorithmic variations while sharing centralized data governance.",
+      "Implemented strict data freshness validation gates to prevent model inference from triggering if upstream distributor syncs were incomplete.",
+      "Partnered directly with BAU client operations to achieve zero-downtime cutovers from legacy rule engines to neural reordering.",
+    ],
+    results: [
+      {
+        label: "Deployment Cycle Time",
+        value: "30% Faster",
+        desc: "Accelerated pipeline execution and model deployment cycles on ADF.",
+      },
+      {
+        label: "Hit Rate Improvement",
+        value: "+10%",
+        desc: "Achieved in the Philippines market upon industrializing the Nexus model.",
+      },
+      {
+        label: "Monthly Ingestion Scale",
+        value: "500M+ Rows",
+        desc: "Processed across 2TB+ Delta lakehouse pipelines with zero data loss.",
+      },
+    ],
+    primaryImage: "/images/awards/unilever-award-ceremony.jpeg",
+    secondaryImage: "/images/awards/move-the-dot-jun2025.png",
+    imageCaption:
+      "Unilever UniOps Global Leadership Recognition & Deloitte 'Move the Dot - Team' Honor for Multi-Country Execution.",
+  },
+  {
+    id: "soq-optimization",
+    tag: "ALGORITHMIC FORECASTING & OBSERVABILITY",
+    title: "SOQ Optimization & Automated Model Observability",
+    subtitle: "Hybrid Statistical/ML Reordering with Telemetry & Drift Detection",
+    summary:
+      "Designed hybrid Suggested Order Quantity (SOQ) reordering engines blending statistical models, regularized regression, and business guardrails, integrated with automated model health telemetry for real-time drift monitoring.",
+    problem:
+      "Distributor orders swung wildly between over-stocking and stock-outs due to volatile promotion cycles and lack of visibility into model accuracy degradation over time.",
+    role: "Algorithm & Pipeline Engineer • Developed feature engineering pipelines, Lasso regression and Exponential Smoothing modules, and traffic-light model health monitoring.",
+    architectureStages: [
+      {
+        name: "Feature Extraction & Lag Engineering",
+        desc: "Generated rolling window averages, seasonal demand spikes, and promotion elasticity features from historical distributor orders.",
+        tech: "PySpark • Window Functions • Feature Store",
+      },
+      {
+        name: "Hybrid Optimization Core",
+        desc: "Combined statistical baseline smoothing with regularized Lasso regression and client-defined inventory minimums.",
+        tech: "Lasso Regression • Exponential Smoothing",
+      },
+      {
+        name: "Automated Observability",
+        desc: "Continuously tracks Mean Absolute Percentage Error (MAPE), distribution drift, and latency anomalies with automated alerting.",
+        tech: "MLOps Platform • Alerting Hooks • Databricks",
+      },
+    ],
+    dataFlow:
+      "Historical Orders & Stock Data → Feature Engineering Engine → Hybrid SOQ Computation → Business Guardrail Verification → Distributor ERP Output & Real-Time Observability Logging.",
+    technologies: [
+      "PySpark",
+      "Lasso Regression",
+      "Exponential Smoothing",
+      "Statistical Modeling",
+      "Databricks Workflows",
+      "MLOps Telemetry",
+      "Delta Lake",
+    ],
+    decisions: [
+      "Applied Lasso Regression to prevent multi-collinearity among closely related seasonal promotional flags.",
+      "Embedded hard non-negative and warehouse-capacity guardrails to ensure algorithmic recommendations remain physically executable.",
+      "Built automated data-drift tripwires that alert engineering whenever distributor ordering variance exceeds statistical thresholds.",
+    ],
+    results: [
+      {
+        label: "Forecast Error Reduction",
+        value: "15%",
+        desc: "Lower forecast error achieved compared to legacy heuristic reordering.",
+      },
+      {
+        label: "Markets Optimized",
+        value: "4 Countries",
+        desc: "Successfully deployed across Indonesia, Vietnam, Philippines & Bangladesh.",
+      },
+      {
+        label: "Operational Observability",
+        value: "24/7 Live",
+        desc: "Continuous model health monitoring with traffic-light diagnostic alerts.",
+      },
+    ],
+    primaryImage: "/images/awards/stanford-ml-specialization.png",
+    secondaryImage: "/images/projects/gcp-looker-dashboard.png",
+    imageCaption:
+      "Stanford DeepLearning.AI Foundations Applied to Production SOQ Optimization & Model Observability.",
+  },
+];
+
 export const TECH_STACK = [
   {
-    category: "Languages & Core",
+    category: "Programming & Distributed Processing",
     color: "text-cyan-400",
     skills: [
       "Python (5★ HackerRank)",
       "PySpark",
+      "Apache Spark",
       "Scala",
       "SQL (3★ HackerRank)",
       "Spark SQL",
-      "Apache Spark",
       "C++ / C",
     ],
   },
   {
-    category: "Cloud & Data Lakehouse",
+    category: "Data Platforms & Lakehouse Architecture",
     color: "text-emerald-400",
     skills: [
-      "Databricks & Workflows",
-      "Delta Lake",
-      "Azure Data Factory (ADF)",
-      "ADLS Gen2",
-      "Google BigQuery",
-      "AWS S3",
+      "Databricks Lakehouse",
+      "Delta Lake (ACID & CDC)",
+      "Medallion (Bronze/Silver/Gold)",
+      "AWS S3 Landing Zone",
+      "Azure Data Lake Storage (ADLS Gen2)",
+      "Apache Parquet",
     ],
   },
   {
-    category: "ML & Data Science",
+    category: "Cloud & Orchestration",
+    color: "text-blue-400",
+    skills: [
+      "Azure Data Factory (ADF)",
+      "Databricks Workflows",
+      "Google Cloud Platform (GCP)",
+      "Google BigQuery",
+      "Cloud Functions",
+      "Git & CI/CD Pipelines",
+    ],
+  },
+  {
+    category: "Machine Learning & MLOps",
     color: "text-amber-400",
     skills: [
-      "Neural Networks (Nexus)",
+      "Nexus Neural Networks",
       "Lasso Regression",
-      "Exponential Smoothing",
-      "Clustering",
-      "MLOps & CI/CD",
-      "Retraining Pipelines",
+      "Exponential Smoothing Time-Series",
+      "Clustering & Ensembles",
+      "MLOps Telemetry & Monitoring",
+      "Automated Retraining Pipelines",
     ],
   },
   {
-    category: "Architecture & BI",
+    category: "Data Modeling, Analytics & BI",
     color: "text-purple-400",
     skills: [
-      "Medallion (Bronze/Silver/Gold)",
-      "CDC (MERGE INTO)",
-      "Star / Snowflake Schema",
-      "Power BI",
-      "Looker Studio",
-      "Databricks Genie",
+      "Star & Snowflake Dimensional Schemas",
+      "CDC Upserts (MERGE INTO)",
+      "Power BI & DAX Optimization",
+      "Looker Studio Live",
+      "Databricks Genie (Natural-Language BI)",
+      "Automated Observability Dashboards",
     ],
   },
 ];

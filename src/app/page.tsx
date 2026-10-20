@@ -4,7 +4,7 @@ import { useState } from "react";
 import SacredCanvas from "../components/SacredCanvas";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
-import KarmaEngineering from "../components/KarmaEngineering";
+import ProjectUniverse from "../components/ProjectUniverse";
 import LifeOdyssey from "../components/LifeOdyssey";
 import InnerSanctum from "../components/InnerSanctum";
 import CredentialsVault from "../components/CredentialsVault";
@@ -36,7 +36,7 @@ export default function HomePage() {
         </ScrollReveal>
 
         <ScrollReveal delay={100}>
-          <KarmaEngineering />
+          <ProjectUniverse />
         </ScrollReveal>
 
         <ScrollReveal delay={100}>

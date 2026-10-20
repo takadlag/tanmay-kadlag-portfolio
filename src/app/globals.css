@@ -118,11 +118,42 @@ body {
   transform: translateY(0);
 }
 
+/* Animated Data Flow for Architecture Diagrams */
+@keyframes flowDash {
+  to {
+    stroke-dashoffset: -40;
+  }
+}
+
+.data-flow-line {
+  stroke-dasharray: 6 6;
+  animation: flowDash 2.5s linear infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.15); }
+}
+
+.pulse-glow {
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+/* Modal and focus traps */
+.modal-backdrop {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .scroll-reveal {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+  .data-flow-line,
+  .pulse-glow {
+    animation: none;
   }
 }
 
